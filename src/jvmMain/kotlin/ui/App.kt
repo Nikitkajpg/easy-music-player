@@ -7,12 +7,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.WindowState
 import ui.components.*
-import ui.components.window.WindowControls
 
 @Composable
-fun App(state: WindowState) {
+fun App() {
     var isPlaying by remember { mutableStateOf(false) }
     var currentTrack by remember { mutableStateOf("Nothing playing") }
     var currentArtist by remember { mutableStateOf("") }
@@ -35,15 +33,6 @@ fun App(state: WindowState) {
             ProgressBar()
             Spacer(Modifier.height(24.dp))
             BottomActions()
-        }
-
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(8.dp),
-            contentAlignment = Alignment.TopEnd
-        ) {
-            WindowControls(state)
         }
     }
 }

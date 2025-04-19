@@ -9,15 +9,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import util.colorGray
+import util.colorLightGray
+import util.toColor
 
 @Composable
 fun AlbumArt() {
     Box(
         modifier = Modifier
             .size(200.dp)
-            .background(Color.DarkGray),
+            .background(colorLightGray),
         contentAlignment = Alignment.Center
     ) {
-        Text("Album Art", color = Color.LightGray)
+        Text("Album Art", color = colorGray)
     }
 }

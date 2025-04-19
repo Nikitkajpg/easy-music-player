@@ -14,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import util.colorNotWhite
+import util.toColor
 
 @Composable
 fun PlaybackControls(isPlaying: Boolean, onPlayPauseToggle: () -> Unit) {
@@ -23,17 +25,17 @@ fun PlaybackControls(isPlaying: Boolean, onPlayPauseToggle: () -> Unit) {
         modifier = Modifier.fillMaxWidth()
     ) {
         IconButton(onClick = { /* previous track */ }) {
-            Icon(Icons.Default.ArrowBack, contentDescription = "Previous", tint = Color.White)
+            Icon(Icons.Default.ArrowBack, contentDescription = "Previous", tint = colorNotWhite) // TODO: 12.04.2025 icon
         }
         IconButton(onClick = onPlayPauseToggle) {
             Icon(
-                if (isPlaying) Icons.Default.KeyboardArrowUp else Icons.Default.PlayArrow,
+                if (isPlaying) Icons.Default.KeyboardArrowUp else Icons.Default.PlayArrow, // TODO: 12.04.2025 icon
                 contentDescription = "Play/Pause",
-                tint = Color.White
+                tint = colorNotWhite
             )
         }
         IconButton(onClick = { /* next track */ }) {
-            Icon(Icons.Default.ArrowForward, contentDescription = "Next", tint = Color.White)
+            Icon(Icons.Default.ArrowForward, contentDescription = "Next", tint = colorNotWhite) // TODO: 12.04.2025 icon
         }
     }
 }

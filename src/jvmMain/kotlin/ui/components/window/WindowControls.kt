@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
@@ -16,6 +15,9 @@ import ui.components.window.controls.TitleIcon
 import ui.icons.CustomCloseIcon
 import ui.icons.CustomMaximizeIcon
 import ui.icons.CustomMinimizeIcon
+import util.colorLightRed
+import util.colorOfBackground
+import util.colorRed
 import kotlin.system.exitProcess
 
 @Composable
@@ -26,7 +28,7 @@ fun WindowControls(state: WindowState) {
     val maximizeIcon: Painter = rememberVectorPainter(CustomMaximizeIcon)
 
     Row(
-        modifier = Modifier.fillMaxWidth().height(48.dp).background(Color(0xFF1A1A1A)).padding(horizontal = 12.dp),
+        modifier = Modifier.fillMaxWidth().height(48.dp).background(colorOfBackground).padding(horizontal = 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -55,7 +57,8 @@ fun WindowControls(state: WindowState) {
                 icon = closeIcon,
                 onClick = { exitProcess(0) },
                 contentDescription = "Exit",
-                borderColor = Color(0xFFFF3D00)
+                normalBorder = colorRed,
+                hoverBorder = colorLightRed
             )
         }
     }

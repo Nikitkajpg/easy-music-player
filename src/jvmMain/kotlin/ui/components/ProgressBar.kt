@@ -6,6 +6,8 @@ import androidx.compose.material.SliderDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import util.colorNotWhite
+import util.toColor
 
 @Composable
 fun ProgressBar() {
@@ -14,8 +16,8 @@ fun ProgressBar() {
         onValueChange = {},
         modifier = Modifier.fillMaxWidth(),
         colors = SliderDefaults.colors(
-            thumbColor = Color.White,
-            activeTrackColor = Color.White
+            thumbColor = colorNotWhite,
+            activeTrackColor = colorNotWhite
         )
     )
 }

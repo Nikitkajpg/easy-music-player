@@ -1,11 +1,11 @@
 package ui.icons
 
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.ImageVector.Builder
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
+import util.colorNotWhite
 
 val CustomCloseIcon: ImageVector
     get() = Builder(
@@ -16,7 +16,7 @@ val CustomCloseIcon: ImageVector
         viewportHeight = 24f
     ).apply {
         path(
-            stroke = SolidColor(Color.White),
+            stroke = SolidColor(colorNotWhite),
             strokeLineWidth = 2.0f
         ) {
             moveTo(6f, 6f)
@@ -34,7 +34,7 @@ val CustomMinimizeIcon: ImageVector
         viewportHeight = 24f
     ).apply {
         path(
-            stroke = SolidColor(Color.White),
+            stroke = SolidColor(colorNotWhite),
             strokeLineWidth = 2.0f
         ) {
             moveTo(6f, 12f)
@@ -51,7 +51,7 @@ val CustomMaximizeIcon: ImageVector
         viewportHeight = 24f
     ).apply {
         path(
-            stroke = SolidColor(Color.White),
+            stroke = SolidColor(colorNotWhite),
             strokeLineWidth = 2.0f
         ) {
             moveTo(6f, 6f)

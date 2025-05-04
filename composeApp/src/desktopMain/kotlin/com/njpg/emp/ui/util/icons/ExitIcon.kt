@@ -22,5 +22,6 @@ fun exitIcon(strokeColor: Color = AppColors.white): ImageVector = Builder(
         lineTo(18f, 18f)
         moveTo(6f, 18f)
         lineTo(18f, 6f)
+        close()
     }
 }.build()

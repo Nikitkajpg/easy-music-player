@@ -1,24 +1,25 @@
 package com.njpg.emp.ui.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Call
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.njpg.emp.ui.components.buttons.DefaultButton
 import com.njpg.emp.ui.components.buttons.DefaultToggleButton
 import com.njpg.emp.ui.util.AppColors
+import com.njpg.emp.ui.util.ToggleMode
+import com.njpg.emp.ui.util.icons.blacklistIcon
+import com.njpg.emp.ui.util.icons.preferencesIcon
 import com.njpg.emp.ui.util.icons.shuffleIcon
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MiddlePanel(
     //todo state
@@ -40,7 +41,7 @@ fun MiddlePanel(
 //    onMenu: () -> Unit,
 //    onBlacklist: () -> Unit,
 ) {
-    var shuffleEnabled by remember { mutableStateOf(false) }
+    var toggleMode by remember { mutableStateOf(ToggleMode.NONE) }
 
     Column(
         modifier = Modifier.fillMaxWidth().background(AppColors.background)
@@ -103,10 +104,9 @@ fun MiddlePanel(
                     horizontalArrangement = Arrangement.End,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    DefaultToggleButton(
-                        toggledInitial = shuffleEnabled,
-                        onToggle = { shuffleEnabled = it },
-                        onClick = {/*todo onToggleShuffle*/ }) { isToggled ->
+                    DefaultToggleButton(isToggled = toggleMode == ToggleMode.SHUFFLE, onToggle = { isToggled ->
+                        toggleMode = if (isToggled) ToggleMode.SHUFFLE else ToggleMode.NONE
+                    }, tooltipText = "Shuffle", onClick = {/*todo onToggleShuffle*/ }) { isToggled ->
                         Icon(
                             imageVector = shuffleIcon(strokeColor = if (isToggled) AppColors.background else AppColors.white),
                             contentDescription = "Shuffle",
@@ -114,21 +114,25 @@ fun MiddlePanel(
                             modifier = Modifier.size(24.dp)
                         )
                     }
-                    IconButton(onClick = {}/*onPreferences*/) {
+
+                    DefaultToggleButton(isToggled = toggleMode == ToggleMode.PREFERENCES, onToggle = { isToggled ->
+                        toggleMode = if (isToggled) ToggleMode.PREFERENCES else ToggleMode.NONE
+                    }, tooltipText = "Preferences", onClick = {/*todo onPreferences*/ }) { isToggled ->
                         Icon(
-                            imageVector = Icons.Filled.Favorite,
+                            imageVector = preferencesIcon(strokeColor = if (isToggled) AppColors.background else AppColors.white),
                             contentDescription = "Preferences",
-                            tint = AppColors.white
+                            tint = Color.Unspecified,
+                            modifier = Modifier.size(24.dp)
                         )
                     }
-                    IconButton(onClick = {}/*onMenu*/) {
+
+                    DefaultButton(
+                        tooltipText = "To blacklist", onClick = {/*todo onBlacklist*/ }) {
                         Icon(
-                            imageVector = Icons.Filled.MoreVert, contentDescription = "Menu", tint = AppColors.white
-                        )
-                    }
-                    IconButton(onClick = {}/*onBlacklist*/) {
-                        Icon(
-                            imageVector = Icons.Filled.Call, contentDescription = "Blacklist", tint = AppColors.white
+                            imageVector = blacklistIcon(),
+                            contentDescription = "To blacklist",
+                            tint = Color.Unspecified,
+                            modifier = Modifier.size(24.dp)
                         )
                     }
                 }

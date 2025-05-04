@@ -20,5 +20,6 @@ fun minimizeIcon(strokeColor: Color = AppColors.white): ImageVector = Builder(
     ) {
         moveTo(6f, 12f)
         lineTo(18f, 12f)
+        close()
     }
 }.build()

@@ -17,37 +17,40 @@ import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.njpg.emp.ui.components.TooltipWrapper
 import com.njpg.emp.ui.util.AppColors
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DefaultToggleButton(
+    isToggled: Boolean,
+    onToggle: (Boolean) -> Unit,
     backgroundColor: Color = AppColors.transparent,
     pressedColor: Color = AppColors.pressed,
     hoveredColor: Color = AppColors.hovered,
     toggledColor: Color = AppColors.yellow,
     toggledHoveredColor: Color = AppColors.yellowToggled,
+    tooltipText: String,
     cornerRadius: Dp = 8.dp,
-    toggleable: Boolean = true,
-    toggledInitial: Boolean = false,
-    onToggle: ((Boolean) -> Unit)? = null,
     onClick: () -> Unit,
     content: @Composable BoxScope.(isToggled: Boolean) -> Unit
 ) {
     var pressed by remember { mutableStateOf(false) }
     var hovered by remember { mutableStateOf(false) }
-    var toggled by remember { mutableStateOf(toggledInitial) }
 
     val currentBackground = when {
         pressed -> pressedColor
-        hovered && toggleable && toggled -> toggledHoveredColor
+        hovered && isToggled -> toggledHoveredColor
         hovered -> hoveredColor
-        toggleable && toggled -> toggledColor
+        isToggled -> toggledColor
         else -> backgroundColor
     }
 
-    Box(
-        modifier = Modifier.clip(RoundedCornerShape(cornerRadius)).pointerInput(toggleable) {
+    TooltipWrapper(
+        tooltipText = tooltipText
+    ) {
+        Box(
+            modifier = Modifier.clip(RoundedCornerShape(cornerRadius)).pointerInput(isToggled) {
                 detectTapGestures(
                     onPress = {
                         pressed = true
@@ -56,16 +59,14 @@ fun DefaultToggleButton(
                         } finally {
                             pressed = false
                         }
-                        if (toggleable) {
-                            toggled = !toggled
-                            onToggle?.invoke(toggled)
-                        }
+                        onToggle(!isToggled)
                         onClick()
                     })
             }.onPointerEvent(PointerEventType.Enter) { hovered = true }
-            .onPointerEvent(PointerEventType.Exit) { hovered = false }.background(currentBackground).size(36.dp),
-        contentAlignment = Alignment.Center,
-    ) {
-        content(toggled)
+                .onPointerEvent(PointerEventType.Exit) { hovered = false }.background(currentBackground).size(36.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            content(isToggled)
+        }
     }
 }

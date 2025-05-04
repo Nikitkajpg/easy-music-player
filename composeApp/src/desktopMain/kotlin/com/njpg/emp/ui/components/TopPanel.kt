@@ -51,8 +51,7 @@ fun WindowScope.TopPanel(windowState: WindowState) {
                 verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(end = 10.dp)
             ) {
                 DefaultButton(
-                    onClick = {
-
+                    tooltipText = "Minimize", onClick = {
                         windowState.isMinimized = true
                     }) {
                     Icon(
@@ -64,7 +63,7 @@ fun WindowScope.TopPanel(windowState: WindowState) {
                 }
 
                 DefaultButton(
-                    onClick = {
+                    tooltipText = "Maximize", onClick = {
                         windowState.placement =
                             if (windowState.placement == WindowPlacement.Maximized) WindowPlacement.Floating
                             else WindowPlacement.Maximized
@@ -79,7 +78,10 @@ fun WindowScope.TopPanel(windowState: WindowState) {
                 }
 
                 DefaultButton(
-                    pressedColor = AppColors.redPressed, hoveredColor = AppColors.red, onClick = { exitProcess(0) }) {
+                    tooltipText = "Exit",
+                    pressedColor = AppColors.redPressed,
+                    hoveredColor = AppColors.red,
+                    onClick = { exitProcess(0) }) {
                     Icon(
                         imageVector = exitIcon(),
                         contentDescription = "Exit",

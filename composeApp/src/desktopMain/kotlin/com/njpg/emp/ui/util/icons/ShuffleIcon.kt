@@ -38,5 +38,6 @@ fun shuffleIcon(strokeColor: Color = AppColors.white): ImageVector = Builder(
         moveTo(20f, 15f)
         lineTo(23f, 18f)
         lineTo(20f, 21f)
+        close()
     }
 }.build()

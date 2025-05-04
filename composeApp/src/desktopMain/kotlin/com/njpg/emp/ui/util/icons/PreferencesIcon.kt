@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 import com.njpg.emp.ui.util.AppColors
 
-fun preferenceIcon(strokeColor: Color = AppColors.white): ImageVector = Builder(
+fun preferencesIcon(strokeColor: Color = AppColors.white): ImageVector = Builder(
     name = "PreferenceIcon", defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f
 ).apply {
     path(
@@ -18,16 +18,19 @@ fun preferenceIcon(strokeColor: Color = AppColors.white): ImageVector = Builder(
         strokeLineJoin = StrokeJoin.Round,
         pathFillType = PathFillType.NonZero
     ) {
-        moveTo(12f, 2f)
-        lineTo(9.65f, 8.76f)
-        lineTo(2.49f, 8.91f)
-        lineTo(8.2f, 13.24f)
-        lineTo(6.12f, 20.09f)
-        lineTo(12f, 16f)
-        lineTo(17.88f, 20.09f)
-        lineTo(15.8f, 13.24f)
-        lineTo(21.51f, 8.91f)
-        lineTo(14.35f, 8.76f)
+        moveTo(6f, 1f)
+        lineTo(6f, 23f)
+
+        moveTo(3f, 20f)
+        lineTo(6f, 23f)
+        lineTo(9f, 20f)
+
+        moveTo(18f, 1f)
+        lineTo(18f, 23f)
+
+        moveTo(15f, 4f)
+        lineTo(18f, 1f)
+        lineTo(21f, 4f)
         close()
     }
 }.build()

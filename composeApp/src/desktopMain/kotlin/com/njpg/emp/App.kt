@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.WindowScope
 import androidx.compose.ui.window.WindowState
+import com.njpg.emp.ui.components.MiddlePanel
 import com.njpg.emp.ui.components.TopPanel
 import com.njpg.emp.ui.util.AppColors
 
@@ -16,7 +17,7 @@ fun WindowScope.App(windowState: WindowState) {
         modifier = Modifier.fillMaxSize().background(AppColors.background)
     ) {
         TopPanel(windowState)
-//        MiddlePanel()
+        MiddlePanel()
 //        BottomPanel()
     }
 }

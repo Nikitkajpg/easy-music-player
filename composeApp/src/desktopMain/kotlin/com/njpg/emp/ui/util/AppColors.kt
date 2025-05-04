@@ -13,6 +13,7 @@ object AppColors {
     val hovered = "#444444".toColor()
     val pressed = "#555555".toColor()
     val yellow = "#ffc600".toColor()
+    val yellowToggled = "#cca000".toColor()
     val red = "#FB5012".toColor()
     val redPressed = "#FC7A4A".toColor()
     val white = "#f4fff8".toColor()

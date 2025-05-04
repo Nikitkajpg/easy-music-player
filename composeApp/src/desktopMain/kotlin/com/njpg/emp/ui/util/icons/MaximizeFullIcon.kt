@@ -1,13 +1,14 @@
-package com.njpg.emp.ui.util
+package com.njpg.emp.ui.util.icons
 
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.ImageVector.Builder
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
+import com.njpg.emp.ui.util.AppColors
 
-fun minimizeIcon(strokeColor: Color = AppColors.white): ImageVector = Builder(
-    name = "MinimizeIcon", defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f
+fun maximizeFullIcon(strokeColor: Color = AppColors.white): ImageVector = Builder(
+    name = "MaximizeFullIcon", defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f
 ).apply {
     path(
         fill = SolidColor(Color.Unspecified),
@@ -17,7 +18,10 @@ fun minimizeIcon(strokeColor: Color = AppColors.white): ImageVector = Builder(
         strokeLineJoin = StrokeJoin.Round,
         pathFillType = PathFillType.NonZero
     ) {
-        moveTo(6f, 12f)
-        lineTo(18f, 12f)
+        moveTo(5f, 5f)
+        lineTo(19f, 5f)
+        lineTo(19f, 19f)
+        lineTo(5f, 19f)
+        close()
     }
 }.build()

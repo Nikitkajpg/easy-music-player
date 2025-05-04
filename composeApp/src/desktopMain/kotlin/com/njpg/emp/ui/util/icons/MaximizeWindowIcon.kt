@@ -1,10 +1,11 @@
-package com.njpg.emp.ui.util
+package com.njpg.emp.ui.util.icons
 
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.ImageVector.Builder
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
+import com.njpg.emp.ui.util.AppColors
 
 fun maximizeWindowIcon(strokeColor: Color = AppColors.white): ImageVector = Builder(
     name = "MaximizeWindowIcon", defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f

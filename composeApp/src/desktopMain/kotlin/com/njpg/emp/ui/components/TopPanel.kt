@@ -15,7 +15,11 @@ import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowScope
 import androidx.compose.ui.window.WindowState
 import com.njpg.emp.ui.components.buttons.DefaultButton
-import com.njpg.emp.ui.util.*
+import com.njpg.emp.ui.util.AppColors
+import com.njpg.emp.ui.util.icons.exitIcon
+import com.njpg.emp.ui.util.icons.maximizeFullIcon
+import com.njpg.emp.ui.util.icons.maximizeWindowIcon
+import com.njpg.emp.ui.util.icons.minimizeIcon
 import emp.composeapp.generated.resources.Res
 import emp.composeapp.generated.resources.icon_svg
 import org.jetbrains.compose.resources.painterResource
@@ -75,7 +79,7 @@ fun WindowScope.TopPanel(windowState: WindowState) {
                 }
 
                 DefaultButton(
-                    hoveredColor = AppColors.red, pressedColor = AppColors.redPressed, onClick = { exitProcess(0) }) {
+                    pressedColor = AppColors.redPressed, hoveredColor = AppColors.red, onClick = { exitProcess(0) }) {
                     Icon(
                         imageVector = exitIcon(),
                         contentDescription = "Exit",

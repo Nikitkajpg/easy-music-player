@@ -1,6 +1,5 @@
 package com.njpg.emp.ui.components.buttons
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
@@ -21,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.njpg.emp.ui.components.TooltipWrapper
 import com.njpg.emp.ui.util.AppColors
 
-@OptIn(ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DefaultButton(
     backgroundColor: Color = AppColors.transparent,

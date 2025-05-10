@@ -1,6 +1,6 @@
 package com.njpg.emp.ui.components
 
-import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -11,19 +11,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import com.njpg.emp.ui.components.buttons.DefaultButton
 import com.njpg.emp.ui.components.buttons.DefaultToggleButton
 import com.njpg.emp.ui.util.AppColors
+import com.njpg.emp.ui.util.PlayState
 import com.njpg.emp.ui.util.ToggleMode
-import com.njpg.emp.ui.util.icons.blacklistIcon
-import com.njpg.emp.ui.util.icons.preferencesIcon
-import com.njpg.emp.ui.util.icons.shuffleIcon
+import com.njpg.emp.ui.util.icons.*
+import emp.composeapp.generated.resources.Res
+import emp.composeapp.generated.resources.vinylPlayer
+import org.jetbrains.compose.resources.painterResource
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MiddlePanel(
     //todo state
-//    isPlaying: Boolean,
 //    currentTimeMs: Long,
 //    volume: Float,
 //    shuffleEnabled: Boolean,
@@ -42,6 +43,7 @@ fun MiddlePanel(
 //    onBlacklist: () -> Unit,
 ) {
     var toggleMode by remember { mutableStateOf(ToggleMode.NONE) }
+    var playState by remember { mutableStateOf(PlayState.PAUSE) }
 
     Column(
         modifier = Modifier.fillMaxWidth().background(AppColors.background)
@@ -59,24 +61,22 @@ fun MiddlePanel(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            /*//todo album cover / disc animation
-            val coverModifier = Modifier.size(200.dp)
-            /*if (track?.cover != null) {
+            // todo: animated stick
+            Box(
+                modifier = Modifier.size(300.dp).aspectRatio(1f)
+            ) {
                 Image(
-                    painter = BitmapPainter(track.cover*//*.asImageBitmap()*//*),
-                    contentDescription = "Cover art",
-                    modifier = coverModifier,
-                    contentScale = ContentScale.Crop
+                    painter = painterResource(Res.drawable.vinylPlayer),
+                    contentDescription = "Vinyl player",
+                    modifier = Modifier.fillMaxSize()
                 )
-            } else {*/
-                //todo vinyl imitation animation
-                val rotation by rememberInfiniteRotation(/*isPlaying*/true)
-                Box(
-                    modifier = coverModifier
-                        .rotate(rotation)
-                        .background(color = AppColors.redPressed, shape = CircleShape)
+
+                VinylDisc(
+                    playState = playState, size = 240.dp, modifier = Modifier.align(Alignment.Center).zIndex(1f)
                 )
-            /*}*/*/
+
+                VinylStick(playState)
+            }
 
             Spacer(Modifier.width(32.dp))
 
@@ -98,7 +98,7 @@ fun MiddlePanel(
 
                 Spacer(Modifier.height(24.dp))
 
-                //todo volume, shuffle, preference row
+                //todo volume, shuffle, preference
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.End,
@@ -153,22 +153,40 @@ fun MiddlePanel(
                     Text(formatTime(durationMs), color = AppColors.white, fontSize = 12.sp)
                 }*/
 
-                /*//todo playback controls
+                //todo playback controls
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    ControlButton(icon = Icons.Filled.ShoppingCart, description = "Previous", onClick = {}/*onPrevious*/)
+                    /*ControlButton(
+                        icon = Icons.Filled.ShoppingCart,
+                        description = "Previous",
+                        onClick = {}/*onPrevious*/
+                    )*/
                     Spacer(Modifier.width(16.dp))
+                    DefaultToggleButton(
+                        toggledColor = AppColors.background,
+                        toggledHoveredColor = AppColors.hovered,
+                        isToggled = playState == PlayState.PLAYING,
+                        onToggle = { playing ->
+                            playState = if (playing) PlayState.PLAYING else PlayState.PAUSE
+                        },
+                        tooltipText = if (playState == PlayState.PLAYING) "Pause" else "Play",
+                        onClick = {}) { isPlaying ->
+                        Icon(
+                            imageVector = if (isPlaying) pauseIcon() else playIcon(),
+                            contentDescription = "Play/Pause",
+                            tint = Color.Unspecified,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }/*Spacer(Modifier.width(16.dp))
                     ControlButton(
-                        icon = if (/*isPlaying*/true) Icons.Filled.Person else Icons.Filled.PlayArrow,
-                        description = "Play/Pause",
-                        onClick = {}/*onPlayPause*/
-                    )
-                    Spacer(Modifier.width(16.dp))
-                    ControlButton(icon = Icons.Filled.Refresh, description = "Next", onClick = {}/*onNext*/)
-                }*/
+                        icon = Icons.Filled.Refresh,
+                        description = "Next",
+                        onClick = {}/*onNext*/
+                    )*/
+                }
             }
         }
 

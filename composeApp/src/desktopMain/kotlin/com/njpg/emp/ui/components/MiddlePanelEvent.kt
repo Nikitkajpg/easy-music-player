@@ -1,6 +1,6 @@
 package com.njpg.emp.ui.components
 
-import com.njpg.emp.ui.util.ToggleMode
+import com.njpg.emp.core.ToggleMode
 
 sealed interface MiddlePanelEvent {
     data object Previous : MiddlePanelEvent

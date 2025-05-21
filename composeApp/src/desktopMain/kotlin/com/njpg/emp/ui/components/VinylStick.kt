@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.zIndex
-import com.njpg.emp.ui.util.PlayState
+import com.njpg.emp.core.PlayState
 import emp.composeapp.generated.resources.Res
 import emp.composeapp.generated.resources.vinylPlayerStick
 import org.jetbrains.compose.resources.painterResource
@@ -26,8 +26,8 @@ fun VinylStick(
 
     Box(
         modifier = Modifier.zIndex(2f).graphicsLayer(
-                rotationZ = rotationAngle, transformOrigin = TransformOrigin(0.9f, 0.1f)
-            )
+            rotationZ = rotationAngle, transformOrigin = TransformOrigin(0.9f, 0.1f)
+        )
     ) {
         Image(
             painter = painterResource(Res.drawable.vinylPlayerStick),

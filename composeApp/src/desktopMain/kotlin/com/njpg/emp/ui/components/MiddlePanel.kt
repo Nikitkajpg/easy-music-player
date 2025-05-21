@@ -33,21 +33,18 @@ fun MiddlePanel(
                 playState = uiState.playState, discSize = discSize
             )
 
-            Spacer(Modifier.width(24.dp))
-
             TrackInfoSection(track = uiState.track, toggleMode = uiState.toggleMode, onToggleModeChange = { newMode ->
                 onEvent(MiddlePanelEvent.ToggleModeChanged(newMode))
             }, onBlacklist = { onEvent(MiddlePanelEvent.Blacklist) })
         }
 
-        Spacer(Modifier.height(24.dp))
+        VolumeSection(
+            volume = uiState.volume, onVolumeChange = { onEvent(MiddlePanelEvent.VolumeChanged(it)) })
 
         ProgressSection(
             currentTimeMs = uiState.currentTimeMs,
             durationMs = uiState.durationMs,
             onSeek = { onEvent(MiddlePanelEvent.Seek(it)) })
-
-        Spacer(Modifier.height(16.dp))
 
         PlaybackControlsSection(
             playState = uiState.playState,
@@ -56,10 +53,5 @@ fun MiddlePanel(
                 onEvent(MiddlePanelEvent.PlayPauseToggle(playing))
             },
             onNext = { onEvent(MiddlePanelEvent.Next) })
-
-        Spacer(Modifier.height(24.dp))
-
-        VolumeSection(
-            volume = uiState.volume, onVolumeChange = { onEvent(MiddlePanelEvent.VolumeChanged(it)) })
     }
 }

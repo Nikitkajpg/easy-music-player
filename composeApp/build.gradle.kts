@@ -27,6 +27,8 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+            implementation("com.googlecode.soundlibs:basicplayer:3.0.0.0")
+            implementation(compose.material3)
         }
     }
 }

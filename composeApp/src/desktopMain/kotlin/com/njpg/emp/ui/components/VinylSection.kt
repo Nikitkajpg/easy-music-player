@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.njpg.emp.ui.util.PlayState
+import com.njpg.emp.core.PlayState
 import emp.composeapp.generated.resources.Res
 import emp.composeapp.generated.resources.vinylPlayer
 import org.jetbrains.compose.resources.painterResource

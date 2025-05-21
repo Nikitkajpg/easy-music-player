@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="256" cy="256" r="256" fill="#111111"/>
+    <circle cx="256" cy="256" r="256" fill="#222222"/>
     <circle cx="256" cy="256" r="240" fill="#f4fff8"/>
-    <ellipse cx="256" cy="256" rx="245" ry="235" fill="#111111"/>
+    <ellipse cx="256" cy="256" rx="245" ry="235" fill="#222222"/>
     <circle cx="256" cy="256" r="215" fill="#f4fff8"/>
-    <ellipse cx="256" cy="256" rx="220" ry="210" fill="#111111"/>
+    <ellipse cx="256" cy="256" rx="220" ry="210" fill="#222222"/>
     <circle cx="256" cy="256" r="190" fill="#f4fff8"/>
-    <ellipse cx="256" cy="256" rx="195" ry="185" fill="#111111"/>
+    <ellipse cx="256" cy="256" rx="195" ry="185" fill="#222222"/>
     <circle cx="256" cy="256" r="165" fill="#f4fff8"/>
-    <ellipse cx="256" cy="256" rx="170" ry="160" fill="#111111"/>
+    <ellipse cx="256" cy="256" rx="170" ry="160" fill="#222222"/>
     <circle cx="256" cy="256" r="140" fill="#f4fff8"/>
-    <ellipse cx="256" cy="256" rx="145" ry="135" fill="#111111"/>
+    <ellipse cx="256" cy="256" rx="145" ry="135" fill="#222222"/>
     <circle cx="256" cy="256" r="115" fill="#f4fff8"/>
     <path d="M319.535 26.2475L366.09 44.4877L256.274 256.237L319.535 26.2475Z" fill="#f4fff8"/>
     <path d="M256.274 256.237L192.807 486.753L146.253 468.512L256.274 256.237Z" fill="#f4fff8"/>
     <path d="M269.951 18.9974L294.814 21.6166L256.21 256.08L269.951 18.9974Z" fill="#f4fff8"/>
     <path d="M256.21 256.08L245.049 494.003L220.186 491.383L256.21 256.08Z" fill="#f4fff8"/>
-    <ellipse cx="256" cy="256" rx="120" ry="110" fill="#111111"/>
-    <circle cx="256" cy="256" r="35.5" stroke="#f4fff8" stroke-width="45"/>
+    <ellipse cx="256" cy="256" rx="120" ry="110" fill="#222222"/>
+    <circle cx="256" cy="256" r="50" stroke="#f4fff8" stroke-width="3" stroke-dasharray="4 11"/>
 </svg>

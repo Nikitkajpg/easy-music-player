@@ -10,10 +10,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.njpg.emp.core.PlayState
 import com.njpg.emp.ui.components.buttons.DefaultButton
 import com.njpg.emp.ui.components.buttons.DefaultToggleButton
 import com.njpg.emp.ui.util.AppColors
-import com.njpg.emp.ui.util.PlayState
 import com.njpg.emp.ui.util.icons.nextIcon
 import com.njpg.emp.ui.util.icons.pauseIcon
 import com.njpg.emp.ui.util.icons.playIcon

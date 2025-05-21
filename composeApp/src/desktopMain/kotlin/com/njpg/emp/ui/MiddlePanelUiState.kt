@@ -1,9 +1,9 @@
 package com.njpg.emp.ui
 
 import androidx.compose.runtime.Immutable
+import com.njpg.emp.core.PlayState
+import com.njpg.emp.core.ToggleMode
 import com.njpg.emp.core.Track
-import com.njpg.emp.ui.util.PlayState
-import com.njpg.emp.ui.util.ToggleMode
 
 @Immutable
 data class MiddlePanelUiState(

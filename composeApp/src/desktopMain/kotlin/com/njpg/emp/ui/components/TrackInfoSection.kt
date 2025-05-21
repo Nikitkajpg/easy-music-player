@@ -9,11 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.njpg.emp.core.ToggleMode
 import com.njpg.emp.core.Track
 import com.njpg.emp.ui.components.buttons.DefaultButton
 import com.njpg.emp.ui.components.buttons.DefaultToggleButton
 import com.njpg.emp.ui.util.AppColors
-import com.njpg.emp.ui.util.ToggleMode
 import com.njpg.emp.ui.util.icons.blacklistIcon
 import com.njpg.emp.ui.util.icons.preferencesIcon
 import com.njpg.emp.ui.util.icons.shuffleIcon

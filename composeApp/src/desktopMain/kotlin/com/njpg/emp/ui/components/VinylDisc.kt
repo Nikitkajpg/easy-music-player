@@ -10,7 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.Dp
-import com.njpg.emp.ui.util.PlayState
+import com.njpg.emp.core.PlayState
 import emp.composeapp.generated.resources.Res
 import emp.composeapp.generated.resources.vinyl
 import org.jetbrains.compose.resources.painterResource

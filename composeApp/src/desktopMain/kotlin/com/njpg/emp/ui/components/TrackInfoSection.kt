@@ -25,8 +25,7 @@ fun TrackInfoSection(
     onToggleModeChange: (ToggleMode) -> Unit,
     onBlacklist: () -> Unit,
 ) {
-    Column(modifier = Modifier/*.weight(1f)*/) {
-        /* track title & artist */
+    Column(modifier = Modifier) {
         Text(
             text = track?.title ?: "Title", color = AppColors.white, fontSize = 20.sp, maxLines = 1
         )
@@ -41,7 +40,6 @@ fun TrackInfoSection(
             horizontalArrangement = Arrangement.End,
             modifier = Modifier.fillMaxWidth()
         ) {
-            /* Shuffle */
             DefaultToggleButton(
                 isToggled = toggleMode == ToggleMode.SHUFFLE,
                 onToggle = { toggled ->
@@ -58,24 +56,22 @@ fun TrackInfoSection(
                 )
             }
 
-            /* Preferences */
             DefaultToggleButton(
                 isToggled = toggleMode == ToggleMode.PREFERENCES,
                 onToggle = { toggled ->
                     onToggleModeChange(if (toggled) ToggleMode.PREFERENCES else ToggleMode.NONE)
                 },
-                tooltipText = "Preferences",
+                tooltipText = "Preference system",
                 onClick = {},
             ) { isToggled ->
                 Icon(
                     imageVector = preferencesIcon(strokeColor = if (isToggled) AppColors.background else AppColors.white),
-                    contentDescription = "Preferences",
+                    contentDescription = "Preference system",
                     tint = Color.Unspecified,
                     modifier = Modifier.size(24.dp)
                 )
             }
 
-            /* Blacklist */
             DefaultButton(
                 tooltipText = "To blacklist",
                 onClick = onBlacklist,

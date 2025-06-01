@@ -13,9 +13,6 @@ import com.njpg.emp.ui.BottomPanelUiState
 import com.njpg.emp.ui.MiddlePanelUiState
 import com.njpg.emp.ui.components.*
 import com.njpg.emp.ui.util.AppColors
-import java.awt.FileDialog
-import java.awt.Frame
-import java.io.File
 import java.nio.file.Paths
 
 @Composable
@@ -70,22 +67,9 @@ fun WindowScope.App(windowState: WindowState) {
         BottomPanel(
             uiState = bottomPanelUiState, onEvent = { event ->
                 when (event) {
-                    is BottomPanelEvent.OpenFolder -> {
-                        var folder: File? = null
-                        val dialog = FileDialog(null as Frame?, "Choose folder", FileDialog.LOAD)
-                        dialog.isVisible = true
-
-                        if (dialog.directory != null) folder = File(dialog.directory)
-
-                        println(folder?.path)
-                    }
+                    is BottomPanelEvent.OpenFolder -> bottomPanelUiState =
+                    bottomPanelUiState.copy(folderPath = event.folderPath)
                 }
-//            onEvent = { event ->
-//            when (event) {
-//                is BottomPanelEvent.OpenFolder -> {
-//                    bottomPanelUiState = bottomPanelUiState.copy()
-//                }
-//            }
             })
     }
 }

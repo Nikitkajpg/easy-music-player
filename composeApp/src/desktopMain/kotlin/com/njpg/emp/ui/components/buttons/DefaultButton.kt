@@ -1,6 +1,7 @@
 package com.njpg.emp.ui.components.buttons
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -28,6 +29,7 @@ fun DefaultButton(
     hoveredColor: Color = AppColors.hovered,
     cornerRadius: Dp = 8.dp,
     tooltipText: String,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit,
     content: @Composable BoxScope.() -> Unit
 ) {
@@ -44,7 +46,8 @@ fun DefaultButton(
         tooltipText = tooltipText
     ) {
         Box(
-            modifier = Modifier.clip(RoundedCornerShape(cornerRadius)).pointerInput(Unit) {
+            modifier = modifier.clip(RoundedCornerShape(cornerRadius))
+            .pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
                         pressed = true
@@ -56,7 +59,7 @@ fun DefaultButton(
                         onClick()
                     })
             }.onPointerEvent(PointerEventType.Enter) { hovered = true }
-                .onPointerEvent(PointerEventType.Exit) { hovered = false }.background(currentBackground).size(36.dp),
+            .onPointerEvent(PointerEventType.Exit) { hovered = false }.background(currentBackground).size(36.dp),
             contentAlignment = Alignment.Center,
             content = content
         )

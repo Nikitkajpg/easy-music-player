@@ -19,12 +19,10 @@ fun ProgressSection(
 ) {
     val sliderPosition = if (durationMs == 0L) 0f else currentTimeMs / durationMs.toFloat()
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()
-    ) {
+    Row {
         Text(formatTime(currentTimeMs), color = AppColors.white, fontSize = 12.sp)
         Slider(
-            value = sliderPosition.coerceIn(0f, 1f), onValueChange = onSeek, modifier = Modifier.weight(1f)
+            value = sliderPosition.coerceIn(0f, 1f), onValueChange = onSeek
         )
         Text(formatTime(durationMs), color = AppColors.white, fontSize = 12.sp)
     }

@@ -17,15 +17,15 @@ import com.njpg.emp.ui.util.AppColors
 import com.njpg.emp.ui.util.icons.openFolder
 
 @Composable
-fun BottomControlsSection(
+fun RightControlsSection(
     uiState: BottomPanelUiState, onOpenFolder: (String) -> Unit
 ) {
     var showDialog by remember { mutableStateOf(false) }
 
 
     Row(
-        modifier = Modifier.fillMaxWidth().background(AppColors.background)
-            .padding(horizontal = 24.dp, vertical = 16.dp), verticalAlignment = Alignment.CenterVertically
+        modifier = Modifier.background(AppColors.background)
+            .padding(horizontal = 24.dp, vertical = 16.dp)
     ) {
         DefaultButton(tooltipText = "Open folder", onClick = {
             showDialog = true

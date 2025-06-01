@@ -1,11 +1,13 @@
 package com.njpg.emp.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
@@ -23,21 +25,17 @@ import com.njpg.emp.ui.util.icons.previousIcon
 
 @Composable
 fun MiddlePanel(
-    uiState: MiddlePanelUiState, onEvent: (MiddlePanelEvent) -> Unit, discSize: Dp = 240.dp
+    uiState: MiddlePanelUiState, onEvent: (MiddlePanelEvent) -> Unit, discSize: Dp = 240.dp, modifier: Modifier
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth().background(AppColors.background)
-            .padding(horizontal = 24.dp, vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally
+        modifier = modifier.background(AppColors.background)
+            .padding(horizontal = 24.dp, vertical = 16.dp)
     ) {
         Text(
             text = uiState.playlistName, color = AppColors.yellow, fontSize = 18.sp
         )
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
+        Row {
             VinylSection(
                 playState = uiState.playState, discSize = discSize
             )
@@ -72,11 +70,7 @@ fun PlaybackControlsSection(
     onPlayPauseToggle: (Boolean) -> Unit,
     onNext: () -> Unit,
 ) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
+    Row {
         DefaultButton(tooltipText = "Previous", onClick = onPrevious) {
             Icon(
                 imageVector = previousIcon(),

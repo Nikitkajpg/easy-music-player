@@ -1,10 +1,11 @@
 package com.njpg.emp.ui.components
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -33,13 +34,7 @@ fun TrackInfoSection(
             text = track?.artist ?: "Artist", color = AppColors.white, fontSize = 14.sp, maxLines = 1
         )
 
-        Spacer(Modifier.height(8.dp))
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.End,
-            modifier = Modifier.fillMaxWidth()
-        ) {
+        Row {
             DefaultToggleButton(
                 isToggled = toggleMode == ToggleMode.SHUFFLE,
                 onToggle = { toggled ->

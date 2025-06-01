@@ -2,7 +2,9 @@ package com.njpg.emp
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.WindowScope
@@ -43,33 +45,37 @@ fun WindowScope.App(windowState: WindowState) {
         modifier = Modifier.fillMaxSize().background(AppColors.background)
     ) {
         TopPanel(windowState)
-        MiddlePanel(
-            uiState = middlePanelUiState, onEvent = { event ->
-                when (event) {
-                    is MiddlePanelEvent.Seek -> middlePanelUiState = middlePanelUiState.copy(
-                        currentTimeMs = (event.position * middlePanelUiState.durationMs).toLong()
-                    )
+        Row(modifier = Modifier.fillMaxWidth()) {
+            MiddlePanel(
+                uiState = middlePanelUiState, onEvent = { event ->
+                    when (event) {
+                        is MiddlePanelEvent.Seek -> middlePanelUiState = middlePanelUiState.copy(
+                            currentTimeMs = (event.position * middlePanelUiState.durationMs).toLong()
+                        )
 
-                    is MiddlePanelEvent.VolumeChanged -> middlePanelUiState =
-                        middlePanelUiState.copy(volume = event.volume)
+                        is MiddlePanelEvent.VolumeChanged -> middlePanelUiState =
+                            middlePanelUiState.copy(volume = event.volume)
 
-                    is MiddlePanelEvent.PlayPauseToggle -> middlePanelUiState = middlePanelUiState.copy(
-                        playState = if (event.playing) PlayState.PLAYING
-                        else PlayState.PAUSE
-                    )
+                        is MiddlePanelEvent.PlayPauseToggle -> middlePanelUiState = middlePanelUiState.copy(
+                            playState = if (event.playing) PlayState.PLAYING
+                            else PlayState.PAUSE
+                        )
 
-                    is MiddlePanelEvent.ToggleModeChanged -> middlePanelUiState =
-                        middlePanelUiState.copy(toggleMode = event.mode)
+                        is MiddlePanelEvent.ToggleModeChanged -> middlePanelUiState =
+                            middlePanelUiState.copy(toggleMode = event.mode)
 
-                    else -> {}
-                }
-            })
-        BottomPanel(
-            uiState = bottomPanelUiState, onEvent = { event ->
-                when (event) {
-                    is BottomPanelEvent.OpenFolder -> bottomPanelUiState =
-                    bottomPanelUiState.copy(folderPath = event.folderPath)
-                }
-            })
+                        else -> {}
+                    }
+                }, modifier = Modifier.weight(2f)
+            )
+            RightPanel(
+                uiState = bottomPanelUiState, onEvent = { event ->
+                    when (event) {
+                        is BottomPanelEvent.OpenFolder -> bottomPanelUiState =
+                            bottomPanelUiState.copy(folderPath = event.folderPath)
+                    }
+                }, modifier = Modifier.weight(1f)
+            )
+        }
     }
 }

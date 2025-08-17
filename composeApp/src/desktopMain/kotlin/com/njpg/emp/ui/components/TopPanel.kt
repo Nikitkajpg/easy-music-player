@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowScope
 import androidx.compose.ui.window.WindowState
+import com.njpg.emp.core.CardManager
 import com.njpg.emp.ui.components.buttons.DefaultButton
 import com.njpg.emp.ui.util.AppColors
 import com.njpg.emp.ui.util.icons.exitIcon
@@ -81,7 +82,10 @@ fun WindowScope.TopPanel(windowState: WindowState) {
                     tooltipText = "Exit",
                     pressedColor = AppColors.redPressed,
                     hoveredColor = AppColors.red,
-                    onClick = { exitProcess(0) }) {
+                    onClick = {
+                        CardManager.savePositions()
+                        exitProcess(0)
+                    }) {
                     Icon(
                         imageVector = exitIcon(),
                         contentDescription = "Exit",

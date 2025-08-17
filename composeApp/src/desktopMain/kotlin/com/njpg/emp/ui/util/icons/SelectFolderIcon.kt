@@ -7,8 +7,8 @@ import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 import com.njpg.emp.ui.util.AppColors
 
-fun openFolder(strokeColor: Color = AppColors.white): ImageVector = Builder(
-    name = "OpenFolder", defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f
+fun selectFolderIcon(strokeColor: Color = AppColors.white): ImageVector = Builder(
+    name = "SelectFolder", defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f
 ).apply {
     path(
         fill = SolidColor(Color.Unspecified),

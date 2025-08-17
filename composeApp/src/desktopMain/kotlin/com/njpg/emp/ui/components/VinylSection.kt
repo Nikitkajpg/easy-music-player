@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import com.njpg.emp.core.PlayState
+//import com.njpg.emp.core.PlayState
 import emp.composeapp.generated.resources.Res
 import emp.composeapp.generated.resources.vinyl
 import emp.composeapp.generated.resources.vinylPlayer
@@ -27,7 +27,7 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun VinylSection(
-    playState: PlayState, discSize: Dp
+    /*playState: PlayState, */discSize: Dp
 ) {
     Box(
         modifier = Modifier.size(discSize + 60.dp).aspectRatio(1f)
@@ -38,15 +38,15 @@ fun VinylSection(
             modifier = Modifier.fillMaxSize()
         )
 
-        VinylDisc(
+        /*VinylDisc(
             playState = playState, size = discSize, modifier = Modifier.align(Alignment.Center)
         )
 
-        VinylStick(playState)
+        VinylStick(playState)*/
     }
 }
 
-@Composable
+/*@Composable
 fun VinylDisc(
     playState: PlayState, size: Dp, modifier: Modifier
 ) {
@@ -71,8 +71,9 @@ fun VinylDisc(
             painter = painterResource(Res.drawable.vinyl), contentDescription = "Vinyl disc"
         )
     }
-}
+}*/
 
+/*
 @Composable
 fun VinylStick(
     playState: PlayState
@@ -92,4 +93,4 @@ fun VinylStick(
             modifier = Modifier.fillMaxSize()
         )
     }
-}
+}*/

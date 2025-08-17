@@ -1,6 +1,7 @@
 package com.njpg.emp.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material.Icon
@@ -14,26 +15,38 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowScope
 import androidx.compose.ui.window.WindowState
-import com.njpg.emp.core.CardManager
+import com.njpg.emp.data.CardManager
 import com.njpg.emp.ui.components.buttons.DefaultButton
 import com.njpg.emp.ui.util.AppColors
-import com.njpg.emp.ui.util.icons.exitIcon
-import com.njpg.emp.ui.util.icons.maximizeFullIcon
-import com.njpg.emp.ui.util.icons.maximizeWindowIcon
-import com.njpg.emp.ui.util.icons.minimizeIcon
+import com.njpg.emp.ui.util.animatedAppColors
+import com.njpg.emp.ui.util.icons.*
 import emp.composeapp.generated.resources.Res
 import emp.composeapp.generated.resources.icon_svg
 import org.jetbrains.compose.resources.painterResource
 import kotlin.system.exitProcess
 
+/**
+ * Верхняя панель окна приложения "Easy Music Player".
+ *
+ * Панель содержит:
+ * - Левый блок: иконка приложения и название.
+ * - Правый блок: кнопки управления окном (смена языка, смена темы, свернуть, развернуть/вернуть, закрыть).
+ *
+ * Панель полностью перетаскиваемая благодаря [WindowDraggableArea].
+ *
+ * При закрытии приложения сохраняются позиции карточек через [CardManager.savePositions] и вызывается [exitProcess].
+ */
 @Composable
 fun WindowScope.TopPanel(windowState: WindowState) {
     WindowDraggableArea(modifier = Modifier.fillMaxWidth()) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().background(animatedAppColors().background),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
+            /**
+             * Левый блок: иконка и название приложения
+             */
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -44,13 +57,25 @@ fun WindowScope.TopPanel(windowState: WindowState) {
                 )
                 Spacer(Modifier.width(20.dp))
                 Text(
-                    text = "Easy Music Player", color = AppColors.yellow, fontSize = 16.sp
+                    text = "Easy Music Player", color = animatedAppColors().yellow, fontSize = 16.sp
                 )
             }
 
+            /**
+             * Правый блок: кнопки управления окном
+             */
             Row(
                 verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(end = 10.dp)
             ) {
+                DefaultButton(
+                    tooltipText = "Change theme", onClick = { AppColors.toggleTheme() }) {
+                    Icon(
+                        imageVector = blacklistIcon(),
+                        contentDescription = "Change theme",
+                        tint = Color.Unspecified,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
                 DefaultButton(
                     tooltipText = "Minimize", onClick = {
                         windowState.isMinimized = true
@@ -80,8 +105,8 @@ fun WindowScope.TopPanel(windowState: WindowState) {
 
                 DefaultButton(
                     tooltipText = "Exit",
-                    pressedColor = AppColors.redPressed,
-                    hoveredColor = AppColors.red,
+                    pressedColor = animatedAppColors().redPressed,
+                    hoveredColor = animatedAppColors().red,
                     onClick = {
                         CardManager.savePositions()
                         exitProcess(0)

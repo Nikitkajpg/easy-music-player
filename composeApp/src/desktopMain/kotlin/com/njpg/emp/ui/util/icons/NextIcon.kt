@@ -5,9 +5,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.ImageVector.Builder
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
-import com.njpg.emp.ui.util.AppColors
+import com.njpg.emp.ui.util.DarkThemeColors
 
-fun nextIcon(strokeColor: Color = AppColors.white): ImageVector = Builder(
+fun nextIcon(strokeColor: Color = DarkThemeColors.white): ImageVector = Builder(
     name = "NextIcon", defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f
 ).apply {
     val cornerRadius = 2f

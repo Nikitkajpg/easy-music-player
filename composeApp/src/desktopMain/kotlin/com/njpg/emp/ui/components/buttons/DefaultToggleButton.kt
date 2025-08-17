@@ -18,18 +18,39 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.njpg.emp.ui.components.TooltipWrapper
-import com.njpg.emp.ui.util.AppColors
+import com.njpg.emp.ui.util.animatedAppColors
 
+/**
+ * Кнопка-переключатель с подсказкой (tooltip) и визуальной индикацией состояний.
+ *
+ * Состояния кнопки:
+ * - обычное
+ * - наведено
+ * - нажато
+ * - переключено (toggled)
+ *
+ * Поддерживает настраиваемые цвета для каждого состояния и анимации темы через [animatedAppColors].
+ *
+ * @param isToggled [Boolean] текущее состояние переключателя (включено/выключено).
+ * @param onToggle Лямбда `(Boolean) -> Unit`, вызываемая при изменении состояния переключателя.
+ * @param backgroundColor [Color] цвет кнопки в обычном состоянии (по умолчанию прозрачный).
+ * @param pressedColor [Color] цвет кнопки при нажатии.
+ * @param hoveredColor [Color] цвет кнопки при наведении.
+ * @param toggledColor [Color] цвет кнопки в состоянии переключено.
+ * @param toggledHoveredColor [Color] цвет кнопки при наведении и переключенном состоянии.
+ * @param tooltipText [String] текст подсказки, отображаемый при наведении.
+ * @param content Composable-контент кнопки, получает текущее состояние [isToggled].
+ */
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DefaultToggleButton(
     isToggled: Boolean,
     onToggle: (Boolean) -> Unit,
-    backgroundColor: Color = AppColors.transparent,
-    pressedColor: Color = AppColors.pressed,
-    hoveredColor: Color = AppColors.hovered,
-    toggledColor: Color = AppColors.yellow,
-    toggledHoveredColor: Color = AppColors.yellowToggled,
+    backgroundColor: Color = animatedAppColors().transparent,
+    pressedColor: Color = animatedAppColors().pressed,
+    hoveredColor: Color = animatedAppColors().hovered,
+    toggledColor: Color = animatedAppColors().yellow,
+    toggledHoveredColor: Color = animatedAppColors().yellowToggled,
     tooltipText: String,
     cornerRadius: Dp = 8.dp,
     onClick: () -> Unit,

@@ -18,14 +18,29 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.njpg.emp.ui.components.TooltipWrapper
-import com.njpg.emp.ui.util.AppColors
+import com.njpg.emp.ui.util.animatedAppColors
 
+/**
+ * Кнопка с подсказкой (tooltip) и визуальной индикацией состояний: обычное, наведено, нажато.
+ *
+ * Поддерживает настраиваемые цвета для состояний:
+ * - [backgroundColor] — обычное состояние,
+ * - [pressedColor] — при нажатии,
+ * - [hoveredColor] — при наведении.
+ *
+ * Цвета по умолчанию берутся из текущей темы через [animatedAppColors].
+ *
+ * @param backgroundColor [Color] цвет кнопки в обычном состоянии.
+ * @param pressedColor [Color] цвет кнопки при нажатии.
+ * @param hoveredColor [Color] цвет кнопки при наведении.
+ * @param tooltipText [String] текст подсказки, отображаемой при наведении.
+ */
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DefaultButton(
-    backgroundColor: Color = AppColors.transparent,
-    pressedColor: Color = AppColors.pressed,
-    hoveredColor: Color = AppColors.hovered,
+    backgroundColor: Color = animatedAppColors().transparent,
+    pressedColor: Color = animatedAppColors().pressed,
+    hoveredColor: Color = animatedAppColors().hovered,
     cornerRadius: Dp = 8.dp,
     tooltipText: String,
     modifier: Modifier = Modifier,
@@ -46,19 +61,19 @@ fun DefaultButton(
     ) {
         Box(
             modifier = modifier.clip(RoundedCornerShape(cornerRadius))
-            .pointerInput(Unit) {
-                detectTapGestures(
-                    onPress = {
-                        pressed = true
-                        try {
-                            awaitRelease()
-                        } finally {
-                            pressed = false
-                        }
-                        onClick()
-                    })
-            }.onPointerEvent(PointerEventType.Enter) { hovered = true }
-            .onPointerEvent(PointerEventType.Exit) { hovered = false }.background(currentBackground).size(36.dp),
+                .pointerInput(Unit) {
+                    detectTapGestures(
+                        onPress = {
+                            pressed = true
+                            try {
+                                awaitRelease()
+                            } finally {
+                                pressed = false
+                            }
+                            onClick()
+                        })
+                }.onPointerEvent(PointerEventType.Enter) { hovered = true }
+                .onPointerEvent(PointerEventType.Exit) { hovered = false }.background(currentBackground).size(36.dp),
             contentAlignment = Alignment.Center,
             content = content
         )

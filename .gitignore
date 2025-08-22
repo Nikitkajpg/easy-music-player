@@ -22,3 +22,6 @@ captures
 /gradlew.bat
 /README.md
 /composeApp/config.json
+/gradle/wrapper/gradle-wrapper.jar
+/gradle/wrapper/gradle-wrapper.properties
+/.fleet/receipt.json

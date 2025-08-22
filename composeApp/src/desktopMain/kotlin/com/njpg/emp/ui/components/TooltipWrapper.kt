@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import com.njpg.emp.ui.util.animatedAppColors
+import com.njpg.emp.data.animatedAppColors
 
 /**
  * Обёртка для отображения подсказки (tooltip) вокруг любого Composable контента.

@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.njpg.emp.ui.util.animatedAppColors
+import com.njpg.emp.data.animatedAppColors
 
 /**
  * Центральная панель приложения, содержащая интерактивные карточки.
@@ -18,33 +18,33 @@ import com.njpg.emp.ui.util.animatedAppColors
  */
 @Composable
 fun MiddlePanel(
-   modifier: Modifier = Modifier
+    modifier: Modifier = Modifier
 ) {
-   Box(
-      modifier = Modifier.fillMaxSize().background(animatedAppColors().background)
-   ) {
-      DraggableCard(
-         "Card 1", modifier = Modifier.size(200.dp, 200.dp)
-      ) {
-         Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-         ) {
-            Button(onClick = { println("Кнопка 1 была нажата") }) {
-               Text("Кнопка 1")
+    Box(
+        modifier = Modifier.fillMaxSize().background(animatedAppColors().background)
+    ) {
+        DraggableCard(
+            "Card 1", modifier = Modifier.size(200.dp, 200.dp)
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Button(onClick = { println("Кнопка 1 была нажата") }) {
+                    Text("Кнопка 1")
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Button(onClick = { println("Кнопка 2 была нажата") }) {
+                    Text("Кнопка 2")
+                }
             }
-            Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = { println("Кнопка 2 была нажата") }) {
-               Text("Кнопка 2")
-            }
-         }
-      }
+        }
 
-      DraggableCard(
-         "Card 2", modifier = Modifier.size(200.dp, 200.dp)
-      ) {
-         Text("Это просто текст в другой карточке!", modifier = Modifier.align(Alignment.Center))
-      }
-   }
+        DraggableCard(
+            "Card 2", modifier = Modifier.size(200.dp, 200.dp)
+        ) {
+            Text("Это просто текст в другой карточке!", modifier = Modifier.align(Alignment.Center))
+        }
+    }
 }

@@ -7,7 +7,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import com.njpg.emp.core.Localization
+import com.njpg.emp.data.ConfigStorage
+import com.njpg.emp.data.Localization
+import com.njpg.emp.data.ThemeManager
 import emp.composeapp.generated.resources.Res
 import emp.composeapp.generated.resources.icon_svg
 import org.jetbrains.compose.resources.painterResource
@@ -17,7 +19,9 @@ fun main() = application {
     var isInitialized by mutableStateOf(false)
 
     LaunchedEffect(Unit) {
-        Localization.init()
+        val config = ConfigStorage.load()
+        Localization.init(config)
+        ThemeManager.setTheme(config.theme)
         isInitialized = true
     }
 

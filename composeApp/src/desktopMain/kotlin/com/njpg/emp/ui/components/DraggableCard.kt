@@ -12,9 +12,9 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.njpg.emp.core.CardPosition
-import com.njpg.emp.core.Localization
 import com.njpg.emp.data.CardManager
-import com.njpg.emp.ui.util.animatedAppColors
+import com.njpg.emp.data.Localization
+import com.njpg.emp.data.animatedAppColors
 import kotlin.math.roundToInt
 
 /**
@@ -25,9 +25,7 @@ import kotlin.math.roundToInt
  */
 @Composable
 fun DraggableCard(
-    id: String,
-    modifier: Modifier = Modifier,
-    content: @Composable (BoxScope.() -> Unit)
+    id: String, modifier: Modifier = Modifier, content: @Composable (BoxScope.() -> Unit)
 ) {
     val saved = remember { CardManager.positions.find { it.id == id } }
     var offsetX by remember { mutableStateOf(saved?.x ?: 0f) }
@@ -39,34 +37,25 @@ fun DraggableCard(
         CardManager.update(CardPosition(id, offsetX, offsetY))
     }
 
-    Column(
-        modifier = modifier
-            .offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
-            .background(animatedAppColors().hovered)
-            .border(1.dp, animatedAppColors().red)
-    ) {
+    Column(modifier = modifier.offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
+        .background(animatedAppColors().hovered).border(1.dp, animatedAppColors().red)) {
         /**
          * Заголовок для перетаскивания
          */
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(32.dp)
-                .background(animatedAppColors().pressed)
+            modifier = Modifier.fillMaxWidth().height(32.dp).background(animatedAppColors().pressed)
                 .pointerInput(Unit) {
                     detectDragGestures { change, dragAmount ->
                         change.consume()
                         updatePositions(offsetX + dragAmount.x, offsetY + dragAmount.y)
                     }
-                },
-            contentAlignment = Alignment.Center
+                }, contentAlignment = Alignment.Center
         ) {
             Text(text = Localization.tr("drag"), color = animatedAppColors().white)
         }
 
         Box(
-            modifier = Modifier.padding(16.dp),
-            content = content
+            modifier = Modifier.padding(16.dp), content = content
         )
     }
 }

@@ -17,8 +17,8 @@ import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.njpg.emp.data.animatedAppColors
 import com.njpg.emp.ui.components.TooltipWrapper
-import com.njpg.emp.ui.util.animatedAppColors
 
 /**
  * Кнопка с подсказкой (tooltip) и визуальной индикацией состояний: обычное, наведено, нажато.
@@ -60,20 +60,19 @@ fun DefaultButton(
         tooltipText = tooltipText
     ) {
         Box(
-            modifier = modifier.clip(RoundedCornerShape(cornerRadius))
-                .pointerInput(Unit) {
-                    detectTapGestures(
-                        onPress = {
-                            pressed = true
-                            try {
-                                awaitRelease()
-                            } finally {
-                                pressed = false
-                            }
-                            onClick()
-                        })
-                }.onPointerEvent(PointerEventType.Enter) { hovered = true }
-                .onPointerEvent(PointerEventType.Exit) { hovered = false }.background(currentBackground).size(36.dp),
+            modifier = modifier.clip(RoundedCornerShape(cornerRadius)).pointerInput(Unit) {
+            detectTapGestures(
+                onPress = {
+                    pressed = true
+                    try {
+                        awaitRelease()
+                    } finally {
+                        pressed = false
+                    }
+                    onClick()
+                })
+        }.onPointerEvent(PointerEventType.Enter) { hovered = true }
+            .onPointerEvent(PointerEventType.Exit) { hovered = false }.background(currentBackground).size(36.dp),
             contentAlignment = Alignment.Center,
             content = content
         )

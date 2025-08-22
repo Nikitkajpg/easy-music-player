@@ -17,8 +17,8 @@ import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.njpg.emp.data.animatedAppColors
 import com.njpg.emp.ui.components.TooltipWrapper
-import com.njpg.emp.ui.util.animatedAppColors
 
 /**
  * Кнопка-переключатель с подсказкой (tooltip) и визуальной индикацией состояний.

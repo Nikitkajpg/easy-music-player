@@ -1,4 +1,4 @@
-package com.njpg.emp.ui.util
+package com.njpg.emp.data
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.runtime.Composable
@@ -12,11 +12,19 @@ import androidx.compose.ui.graphics.Color
  *
  * Позволяет переключаться между светлой и тёмной темами.
  */
-object AppColors {
+object ThemeManager {
     var current by mutableStateOf<ThemeColors>(DarkThemeColors)
+
+    fun setTheme(theme: String) {
+        current = if (theme == "dark") DarkThemeColors else LightThemeColors
+    }
 
     fun toggleTheme() {
         current = if (current == DarkThemeColors) LightThemeColors else DarkThemeColors
+    }
+
+    fun getThemeAsString(): String {
+        return if (current == DarkThemeColors) "dark" else "light"
     }
 }
 
@@ -42,7 +50,7 @@ fun String.toColor(): Color {
  */
 @Composable
 fun animatedAppColors(): ThemeColors {
-    val current = AppColors.current
+    val current = ThemeManager.current
     return object : ThemeColors {
         override val background by animateColorAsState(current.background)
         override val hovered by animateColorAsState(current.hovered)

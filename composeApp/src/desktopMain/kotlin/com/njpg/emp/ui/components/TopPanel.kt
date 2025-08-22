@@ -15,11 +15,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowScope
 import androidx.compose.ui.window.WindowState
-import com.njpg.emp.core.Localization
-import com.njpg.emp.data.CardManager
+import com.njpg.emp.core.Config
+import com.njpg.emp.data.*
 import com.njpg.emp.ui.components.buttons.DefaultButton
-import com.njpg.emp.ui.util.AppColors
-import com.njpg.emp.ui.util.animatedAppColors
 import com.njpg.emp.ui.util.icons.*
 import emp.composeapp.generated.resources.Res
 import emp.composeapp.generated.resources.icon_svg
@@ -71,7 +69,7 @@ fun WindowScope.TopPanel(windowState: WindowState) {
                     Text(text = Localization.getCurrentLang())
                 }
                 DefaultButton(
-                    tooltipText = Localization.tr("change_theme"), onClick = { AppColors.toggleTheme() }) {
+                    tooltipText = Localization.tr("change_theme"), onClick = { ThemeManager.toggleTheme() }) {
                     Icon(
                         imageVector = blacklistIcon(),
                         contentDescription = "Change theme",
@@ -115,6 +113,11 @@ fun WindowScope.TopPanel(windowState: WindowState) {
                     hoveredColor = animatedAppColors().red,
                     onClick = {
                         CardManager.save()
+                        ConfigStorage.save(
+                            config = Config(
+                                lang = Localization.getCurrentLang(), theme = ThemeManager.getThemeAsString()
+                            )
+                        )
                         exitProcess(0)
                     }) {
                     Icon(

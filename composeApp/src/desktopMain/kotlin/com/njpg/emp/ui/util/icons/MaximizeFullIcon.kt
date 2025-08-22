@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.ImageVector.Builder
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
-import com.njpg.emp.ui.util.DarkThemeColors
+import com.njpg.emp.data.DarkThemeColors
 
 fun maximizeFullIcon(strokeColor: Color = DarkThemeColors.white): ImageVector = Builder(
     name = "MaximizeFullIcon", defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f

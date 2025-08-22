@@ -11,11 +11,11 @@ import com.njpg.emp.data.CardPositionStorage.saveAll
  * Использует [CardPositionStorage] для загрузки и сохранения данных в JSON-файл.
  */
 object CardManager {
-    private val positions: MutableList<CardPosition> = loadAll().toMutableList()
+    private val _positions: MutableList<CardPosition> = loadAll().toMutableList()
 
     /** Список всех сохранённых позиций карточек (только для чтения) */
-    val allPositions: List<CardPosition>
-        get() = positions
+    val positions: List<CardPosition>
+        get() = _positions
 
     /**
      * Обновляет позицию карточки.
@@ -25,16 +25,16 @@ object CardManager {
      *
      * @param pos [CardPosition] объект с идентификатором и координатами карточки.
      */
-    fun updatePosition(pos: CardPosition) {
-        val index = positions.indexOfFirst { it.id == pos.id }
+    fun update(pos: CardPosition) {
+        val index = _positions.indexOfFirst { it.id == pos.id }
         if (index >= 0) {
-            positions[index] = pos
+            _positions[index] = pos
         } else {
-            positions.add(pos)
+            _positions.add(pos)
         }
     }
 
-    fun savePositions() {
-        saveAll(positions)
+    fun save() {
+        saveAll(_positions)
     }
 }

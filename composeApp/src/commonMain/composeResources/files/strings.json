@@ -1,0 +1,20 @@
+{
+  "en" : {
+    "change_language" : "Change language",
+    "change_theme" : "Change theme",
+    "minimize" : "Minimize",
+    "maximize" : "Maximize",
+    "restore" : "Restore",
+    "exit" : "Exit",
+    "drag" : "Drag"
+  },
+  "ru" : {
+    "change_language" : "Изменить язык",
+    "change_theme" : "Изменить тему",
+    "minimize" : "Свернуть",
+    "maximize" : "Развернуть",
+    "restore" : "Восстановить",
+    "exit" : "Выход",
+    "drag" : "Переместить"
+  }
+}

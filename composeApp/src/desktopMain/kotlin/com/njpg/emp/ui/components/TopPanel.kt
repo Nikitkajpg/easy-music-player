@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowScope
 import androidx.compose.ui.window.WindowState
+import com.njpg.emp.core.Localization
 import com.njpg.emp.data.CardManager
 import com.njpg.emp.ui.components.buttons.DefaultButton
 import com.njpg.emp.ui.util.AppColors
@@ -34,7 +35,7 @@ import kotlin.system.exitProcess
  *
  * Панель полностью перетаскиваемая благодаря [WindowDraggableArea].
  *
- * При закрытии приложения сохраняются позиции карточек через [CardManager.savePositions] и вызывается [exitProcess].
+ * При закрытии приложения сохраняются позиции карточек через [CardManager.save] и вызывается [exitProcess].
  */
 @Composable
 fun WindowScope.TopPanel(windowState: WindowState) {
@@ -44,9 +45,7 @@ fun WindowScope.TopPanel(windowState: WindowState) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            /**
-             * Левый блок: иконка и название приложения
-             */
+            /** Левый блок: иконка и название приложения */
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -61,14 +60,18 @@ fun WindowScope.TopPanel(windowState: WindowState) {
                 )
             }
 
-            /**
-             * Правый блок: кнопки управления окном
-             */
+            /** Правый блок: кнопки управления окном */
             Row(
                 verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(end = 10.dp)
             ) {
                 DefaultButton(
-                    tooltipText = "Change theme", onClick = { AppColors.toggleTheme() }) {
+                    tooltipText = Localization.tr("change_language"), onClick = {
+                        Localization.toggleLanguage()
+                    }) {
+                    Text(text = Localization.getCurrentLang())
+                }
+                DefaultButton(
+                    tooltipText = Localization.tr("change_theme"), onClick = { AppColors.toggleTheme() }) {
                     Icon(
                         imageVector = blacklistIcon(),
                         contentDescription = "Change theme",
@@ -77,7 +80,7 @@ fun WindowScope.TopPanel(windowState: WindowState) {
                     )
                 }
                 DefaultButton(
-                    tooltipText = "Minimize", onClick = {
+                    tooltipText = Localization.tr("minimize"), onClick = {
                         windowState.isMinimized = true
                     }) {
                     Icon(
@@ -89,10 +92,13 @@ fun WindowScope.TopPanel(windowState: WindowState) {
                 }
 
                 DefaultButton(
-                    tooltipText = "Maximize", onClick = {
-                        windowState.placement =
-                            if (windowState.placement == WindowPlacement.Maximized) WindowPlacement.Floating
-                            else WindowPlacement.Maximized
+                    tooltipText = Localization.tr(
+                        if (windowState.placement == WindowPlacement.Maximized) "restore"
+                        else "maximize"
+                    ), onClick = {
+                        windowState.placement = if (windowState.placement == WindowPlacement.Maximized) {
+                            WindowPlacement.Floating
+                        } else WindowPlacement.Maximized
                     }) {
                     Icon(
                         imageVector = if (windowState.placement == WindowPlacement.Maximized) maximizeWindowIcon()
@@ -104,11 +110,11 @@ fun WindowScope.TopPanel(windowState: WindowState) {
                 }
 
                 DefaultButton(
-                    tooltipText = "Exit",
+                    tooltipText = Localization.tr("exit"),
                     pressedColor = animatedAppColors().redPressed,
                     hoveredColor = animatedAppColors().red,
                     onClick = {
-                        CardManager.savePositions()
+                        CardManager.save()
                         exitProcess(0)
                     }) {
                     Icon(

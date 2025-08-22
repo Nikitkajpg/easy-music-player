@@ -11,8 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.njpg.emp.data.CardManager
 import com.njpg.emp.core.CardPosition
+import com.njpg.emp.core.Localization
+import com.njpg.emp.data.CardManager
 import com.njpg.emp.ui.util.animatedAppColors
 import kotlin.math.roundToInt
 
@@ -28,14 +29,14 @@ fun DraggableCard(
     modifier: Modifier = Modifier,
     content: @Composable (BoxScope.() -> Unit)
 ) {
-    val saved = remember { CardManager.allPositions.find { it.id == id } }
+    val saved = remember { CardManager.positions.find { it.id == id } }
     var offsetX by remember { mutableStateOf(saved?.x ?: 0f) }
     var offsetY by remember { mutableStateOf(saved?.y ?: 0f) }
 
     fun updatePositions(x: Float, y: Float) {
         offsetX = x
         offsetY = y.coerceAtLeast(0f)
-        CardManager.updatePosition(CardPosition(id, offsetX, offsetY))
+        CardManager.update(CardPosition(id, offsetX, offsetY))
     }
 
     Column(
@@ -60,7 +61,7 @@ fun DraggableCard(
                 },
             contentAlignment = Alignment.Center
         ) {
-            Text("Drag me", color = animatedAppColors().white)
+            Text(text = Localization.tr("drag"), color = animatedAppColors().white)
         }
 
         Box(

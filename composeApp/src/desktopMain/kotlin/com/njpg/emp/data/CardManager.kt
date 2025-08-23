@@ -1,40 +1,38 @@
 package com.njpg.emp.data
 
-import com.njpg.emp.core.CardPosition
+import com.njpg.emp.core.Card
 import com.njpg.emp.data.CardPositionStorage.loadAll
 import com.njpg.emp.data.CardPositionStorage.saveAll
 
 /**
  * Менеджер позиций карточек на экране.
  *
- * Отвечает за хранение текущих позиций [CardPosition], их обновление и сохранение.
+ * Отвечает за хранение текущих позиций [Card], их обновление и сохранение.
  * Использует [CardPositionStorage] для загрузки и сохранения данных в JSON-файл.
  */
 object CardManager {
-    private val _positions: MutableList<CardPosition> = loadAll().toMutableList()
+    private val _cards: MutableList<Card> = loadAll().toMutableList()
 
     /** Список всех сохранённых позиций карточек (только для чтения) */
-    val positions: List<CardPosition>
-        get() = _positions
+    val cards: List<Card>
+        get() = _cards
 
     /**
      * Обновляет позицию карточки.
      *
-     * Если карточка с таким [pos.id] уже существует, её позиция заменяется,
+     * Если карточка с таким [card.id] уже существует, её позиция заменяется,
      * иначе новая позиция добавляется в список.
-     *
-     * @param pos [CardPosition] объект с идентификатором и координатами карточки.
      */
-    fun update(pos: CardPosition) {
-        val index = _positions.indexOfFirst { it.id == pos.id }
+    fun update(card: Card) {
+        val index = _cards.indexOfFirst { it.id == card.id }
         if (index >= 0) {
-            _positions[index] = pos
+            _cards[index] = card
         } else {
-            _positions.add(pos)
+            _cards.add(card)
         }
     }
 
     fun save() {
-        saveAll(_positions)
+        saveAll(_cards)
     }
 }

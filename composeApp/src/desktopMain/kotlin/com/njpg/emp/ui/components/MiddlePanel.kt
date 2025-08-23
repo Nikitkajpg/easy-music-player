@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.njpg.emp.data.CardManager
 import com.njpg.emp.data.animatedAppColors
 
 /**
@@ -17,14 +18,12 @@ import com.njpg.emp.data.animatedAppColors
  * из [animatedAppColors] для адаптации к светлой или тёмной теме.
  */
 @Composable
-fun MiddlePanel(
-    modifier: Modifier = Modifier
-) {
+fun MiddlePanel() {
     Box(
         modifier = Modifier.fillMaxSize().background(animatedAppColors().background)
     ) {
         DraggableCard(
-            "Card 1", modifier = Modifier.size(200.dp, 200.dp)
+            "Card 1", modifier = Modifier.size(CardManager.cards[0].width.dp, CardManager.cards[0].height.dp)
         ) {
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -42,7 +41,7 @@ fun MiddlePanel(
         }
 
         DraggableCard(
-            "Card 2", modifier = Modifier.size(200.dp, 200.dp)
+            "Card 2", modifier = Modifier.size(CardManager.cards[1].width.dp, CardManager.cards[1].height.dp)
         ) {
             Text("Это просто текст в другой карточке!", modifier = Modifier.align(Alignment.Center))
         }

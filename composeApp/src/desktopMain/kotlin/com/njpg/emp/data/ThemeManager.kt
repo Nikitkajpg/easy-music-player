@@ -7,11 +7,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 
-/**
- * Менеджер текущей темы приложения.
- *
- * Позволяет переключаться между светлой и тёмной темами.
- */
 object ThemeManager {
     var current by mutableStateOf<ThemeColors>(DarkThemeColors)
 
@@ -28,26 +23,11 @@ object ThemeManager {
     }
 }
 
-/**
- * Преобразует строку в формате HEX (например, "#ff0000") в объект [Color].
- *
- * Автоматически добавляет альфа-канал ff (полная непрозрачность), если он не указан.
- *
- * @receiver [String] строка с цветом в HEX-формате.
- * @return [Color] объект цвета.
- */
 fun String.toColor(): Color {
     val hex = removePrefix("#").lowercase()
     return Color("ff$hex".toLong(16).toInt())
 }
 
-/**
- * Возвращает текущие цвета приложения с анимацией при смене темы.
- *
- * Используется в Composable функциях для плавного перехода между светлой и тёмной темами.
- *
- * @return [ThemeColors] объект с анимированными цветами.
- */
 @Composable
 fun animatedAppColors(): ThemeColors {
     val current = ThemeManager.current

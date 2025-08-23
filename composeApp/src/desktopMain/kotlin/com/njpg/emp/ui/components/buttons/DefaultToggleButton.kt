@@ -20,27 +20,6 @@ import androidx.compose.ui.unit.dp
 import com.njpg.emp.data.animatedAppColors
 import com.njpg.emp.ui.components.TooltipWrapper
 
-/**
- * Кнопка-переключатель с подсказкой (tooltip) и визуальной индикацией состояний.
- *
- * Состояния кнопки:
- * - обычное
- * - наведено
- * - нажато
- * - переключено (toggled)
- *
- * Поддерживает настраиваемые цвета для каждого состояния и анимации темы через [animatedAppColors].
- *
- * @param isToggled [Boolean] текущее состояние переключателя (включено/выключено).
- * @param onToggle Лямбда `(Boolean) -> Unit`, вызываемая при изменении состояния переключателя.
- * @param backgroundColor [Color] цвет кнопки в обычном состоянии (по умолчанию прозрачный).
- * @param pressedColor [Color] цвет кнопки при нажатии.
- * @param hoveredColor [Color] цвет кнопки при наведении.
- * @param toggledColor [Color] цвет кнопки в состоянии переключено.
- * @param toggledHoveredColor [Color] цвет кнопки при наведении и переключенном состоянии.
- * @param tooltipText [String] текст подсказки, отображаемый при наведении.
- * @param content Composable-контент кнопки, получает текущее состояние [isToggled].
- */
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DefaultToggleButton(

@@ -13,25 +13,6 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.njpg.emp.data.animatedAppColors
 
-/**
- * Обёртка для отображения подсказки (tooltip) вокруг любого Composable контента.
- *
- * Подсказка появляется при наведении курсора на контент с задержкой 1.5 секунды.
- * Tooltip отображается с плавным фоном и рамкой, использует текущую тему приложения
- * через [animatedAppColors].
- *
- * @param tooltipText [String] текст подсказки, который будет отображён.
- * @param content Composable контент, вокруг которого отображается подсказка.
- *
- * Пример использования:
- * ```
- * TooltipWrapper(tooltipText = "Save changes") {
- *     IconButton(onClick = { /* действие */ }) {
- *         Icon(imageVector = saveIcon, contentDescription = "Save")
- *     }
- * }
- * ```
- */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TooltipWrapper(tooltipText: String, content: @Composable BoxScope.() -> Unit) {

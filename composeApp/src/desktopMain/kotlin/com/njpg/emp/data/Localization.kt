@@ -10,13 +10,6 @@ import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import java.io.File
 
-/**
- * Объект-синглтон, предоставляющий централизованный и реактивный механизм для управления
- * локализацией в Compose-приложении.
- *
- * Позволяет загружать строковые ресурсы из встроенного файла и перезаписывать их
- * с помощью внешнего файла `strings.json`, обеспечивая гибкую систему перевода.
- */
 object Localization {
     private val json = Json { ignoreUnknownKeys = true }
     private var translations: Translations = Translations()
@@ -25,11 +18,9 @@ object Localization {
 
     @OptIn(ExperimentalResourceApi::class)
     suspend fun init(config: Config) {
-        // Загружаем встроенный JSON
         val defaultJson = Res.readBytes("files/strings.json").decodeToString()
         translations = json.decodeFromString(Translations.serializer(), defaultJson)
 
-        // Если есть внешний JSON → мержим
         if (externalFile.exists()) {
             runCatching {
                 val overrideJson = externalFile.readText()

@@ -24,17 +24,6 @@ import emp.composeapp.generated.resources.icon_svg
 import org.jetbrains.compose.resources.painterResource
 import kotlin.system.exitProcess
 
-/**
- * Верхняя панель окна приложения "Easy Music Player".
- *
- * Панель содержит:
- * - Левый блок: иконка приложения и название.
- * - Правый блок: кнопки управления окном (смена языка, смена темы, свернуть, развернуть/вернуть, закрыть).
- *
- * Панель полностью перетаскиваемая благодаря [WindowDraggableArea].
- *
- * При закрытии приложения сохраняются позиции карточек через [CardManager.save] и вызывается [exitProcess].
- */
 @Composable
 fun WindowScope.TopPanel(windowState: WindowState) {
     WindowDraggableArea(modifier = Modifier.fillMaxWidth()) {
@@ -43,7 +32,6 @@ fun WindowScope.TopPanel(windowState: WindowState) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            /** Левый блок: иконка и название приложения */
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -58,7 +46,6 @@ fun WindowScope.TopPanel(windowState: WindowState) {
                 )
             }
 
-            /** Правый блок: кнопки управления окном */
             Row(
                 verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(end = 10.dp)
             ) {

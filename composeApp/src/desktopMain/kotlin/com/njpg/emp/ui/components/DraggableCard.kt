@@ -17,12 +17,6 @@ import com.njpg.emp.data.Localization
 import com.njpg.emp.data.animatedAppColors
 import kotlin.math.roundToInt
 
-/**
- * Перетаскиваемая карточка с произвольным содержимым.
- *
- * Карточка запоминает своё положение через [CardManager] и позволяет пользователю
- * изменять позицию по экрану с помощью мыши.
- */
 @Composable
 fun DraggableCard(
     id: String, modifier: Modifier = Modifier, content: @Composable (BoxScope.() -> Unit)
@@ -41,9 +35,6 @@ fun DraggableCard(
 
     Column(modifier = modifier.offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
         .background(animatedAppColors().hovered).border(1.dp, animatedAppColors().red)) {
-        /**
-         * Заголовок для перетаскивания
-         */
         Box(
             modifier = Modifier.fillMaxWidth().height(32.dp).background(animatedAppColors().pressed)
                 .pointerInput(Unit) {

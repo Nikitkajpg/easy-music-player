@@ -20,21 +20,6 @@ import androidx.compose.ui.unit.dp
 import com.njpg.emp.data.animatedAppColors
 import com.njpg.emp.ui.components.TooltipWrapper
 
-/**
- * Кнопка с подсказкой (tooltip) и визуальной индикацией состояний: обычное, наведено, нажато.
- *
- * Поддерживает настраиваемые цвета для состояний:
- * - [backgroundColor] — обычное состояние,
- * - [pressedColor] — при нажатии,
- * - [hoveredColor] — при наведении.
- *
- * Цвета по умолчанию берутся из текущей темы через [animatedAppColors].
- *
- * @param backgroundColor [Color] цвет кнопки в обычном состоянии.
- * @param pressedColor [Color] цвет кнопки при нажатии.
- * @param hoveredColor [Color] цвет кнопки при наведении.
- * @param tooltipText [String] текст подсказки, отображаемой при наведении.
- */
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DefaultButton(

@@ -11,12 +11,6 @@ import androidx.compose.ui.unit.dp
 import com.njpg.emp.data.CardManager
 import com.njpg.emp.data.animatedAppColors
 
-/**
- * Центральная панель приложения, содержащая интерактивные карточки.
- *
- * Панель занимает всё доступное пространство и использует текущий цвет фона
- * из [animatedAppColors] для адаптации к светлой или тёмной теме.
- */
 @Composable
 fun MiddlePanel() {
     Box(

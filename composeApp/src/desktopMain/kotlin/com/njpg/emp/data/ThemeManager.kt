@@ -6,21 +6,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import com.njpg.emp.core.Theme
 
 object ThemeManager {
-    var current by mutableStateOf<ThemeColors>(DarkThemeColors)
+    var current by mutableStateOf(DarkTheme)
 
-    fun setTheme(theme: String) {
-        current = if (theme == "dark") DarkThemeColors else LightThemeColors
+    fun setTheme(theme: Theme) {
+        current = theme
     }
 
     fun toggleTheme() {
-        current = if (current == DarkThemeColors) LightThemeColors else DarkThemeColors
+        current = if (current == DarkTheme) LightTheme else DarkTheme
     }
 
-    fun getThemeAsString(): String {
-        return if (current == DarkThemeColors) "dark" else "light"
-    }
+    fun getThemeAsString(): Theme = current
 }
 
 fun String.toColor(): Color {
@@ -29,22 +28,22 @@ fun String.toColor(): Color {
 }
 
 @Composable
-fun animatedAppColors(): ThemeColors {
+fun animatedAppColors(): ThemeColorsComposable {
     val current = ThemeManager.current
-    return object : ThemeColors {
-        override val background by animateColorAsState(current.background)
-        override val hovered by animateColorAsState(current.hovered)
-        override val pressed by animateColorAsState(current.pressed)
-        override val yellow by animateColorAsState(current.yellow)
-        override val yellowToggled by animateColorAsState(current.yellowToggled)
-        override val red by animateColorAsState(current.red)
-        override val redPressed by animateColorAsState(current.redPressed)
-        override val white by animateColorAsState(current.white)
+    return object : ThemeColorsComposable {
+        override val background by animateColorAsState(current.background.toColor())
+        override val hovered by animateColorAsState(current.hovered.toColor())
+        override val pressed by animateColorAsState(current.pressed.toColor())
+        override val yellow by animateColorAsState(current.yellow.toColor())
+        override val yellowToggled by animateColorAsState(current.yellowToggled.toColor())
+        override val red by animateColorAsState(current.red.toColor())
+        override val redPressed by animateColorAsState(current.redPressed.toColor())
+        override val white by animateColorAsState(current.white.toColor())
         override val transparent by animateColorAsState(current.transparent)
     }
 }
 
-interface ThemeColors {
+interface ThemeColorsComposable {
     val background: Color
     val hovered: Color
     val pressed: Color
@@ -56,26 +55,24 @@ interface ThemeColors {
     val transparent: Color
 }
 
-object DarkThemeColors : ThemeColors {
-    override val background = "#222222".toColor()
-    override val hovered = "#444444".toColor()
-    override val pressed = "#555555".toColor()
-    override val yellow = "#ffc600".toColor()
-    override val yellowToggled = "#cca000".toColor()
-    override val red = "#FB5012".toColor()
-    override val redPressed = "#FC7A4A".toColor()
-    override val white = "#f4fff8".toColor()
-    override val transparent = Color.Transparent
-}
+val DarkTheme = Theme (
+    background = "#222222",
+    hovered = "#444444",
+    pressed = "#555555",
+    yellow = "#ffc600",
+    yellowToggled = "#cca000",
+    red = "#FB5012",
+    redPressed = "#FC7A4A",
+    white = "#f4fff8"
+)
 
-object LightThemeColors : ThemeColors {
-    override val background = "#ffffff".toColor()
-    override val hovered = "#dddddd".toColor()
-    override val pressed = "#cccccc".toColor()
-    override val yellow = "#ffc600".toColor()
-    override val yellowToggled = "#cca000".toColor()
-    override val red = "#FB5012".toColor()
-    override val redPressed = "#FC7A4A".toColor()
-    override val white = "#222222".toColor()
-    override val transparent = Color.Transparent
-}
+val LightTheme = Theme (
+    background = "#ffffff",
+    hovered = "#dddddd",
+    pressed = "#cccccc",
+    yellow = "#ffc600",
+    yellowToggled = "#cca000",
+    red = "#FB5012",
+    redPressed = "#FC7A4A",
+    white = "#222222"
+)

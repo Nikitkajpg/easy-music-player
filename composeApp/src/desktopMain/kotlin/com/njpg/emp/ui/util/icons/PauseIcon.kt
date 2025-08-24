@@ -1,13 +1,15 @@
 package com.njpg.emp.ui.util.icons
 
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.ImageVector.Builder
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
-import com.njpg.emp.data.DarkThemeColors
+import com.njpg.emp.data.animatedAppColors
 
-fun pauseIcon(strokeColor: Color = DarkThemeColors.white): ImageVector = Builder(
+@Composable
+fun pauseIcon(strokeColor: Color = animatedAppColors().white): ImageVector = Builder(
     name = "PauseIcon", defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f
 ).apply {
     path(

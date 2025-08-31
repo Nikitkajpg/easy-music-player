@@ -5,6 +5,7 @@ import kotlinx.serialization.json.Json
 import java.io.File
 
 object ConfigStorage {
+    private val dataDir = File("data")
     private val saveFile = File("config.json")
     private val json = Json {
         prettyPrint = true
@@ -13,6 +14,7 @@ object ConfigStorage {
 
     fun save(config: Config) {
         runCatching {
+            if (!dataDir.exists()) dataDir.mkdirs()
             saveFile.writeText(json.encodeToString(Config.serializer(), config))
         }.onFailure {
             println("Ошибка при сохранении файла конфигурации: ${it.message}")
@@ -20,6 +22,7 @@ object ConfigStorage {
     }
 
     fun load(): Config = runCatching {
+        if (!dataDir.exists()) dataDir.mkdirs()
         val content = saveFile.takeIf { it.exists() }?.readText().orEmpty().ifBlank { "[]" }
         json.decodeFromString(Config.serializer(), content)
     }.getOrElse {

@@ -5,10 +5,14 @@ import com.njpg.emp.data.CardPositionStorage.loadAll
 import com.njpg.emp.data.CardPositionStorage.saveAll
 
 object CardManager {
-    private val _cards: MutableList<Card> = loadAll().toMutableList()
+    private var _cards: MutableList<Card> = mutableListOf()
 
     val cards: List<Card>
         get() = _cards
+
+    fun init() {
+        _cards = loadAll().toMutableList()
+    }
 
     fun update(card: Card) {
         val index = _cards.indexOfFirst { it.id == card.id }

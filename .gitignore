@@ -25,3 +25,4 @@ captures
 /gradle/wrapper/gradle-wrapper.jar
 /gradle/wrapper/gradle-wrapper.properties
 /.fleet/receipt.json
+/composeApp/data/

@@ -19,22 +19,27 @@ import kotlin.math.roundToInt
 
 @Composable
 fun DraggableCard(
-    id: String, modifier: Modifier = Modifier, content: @Composable (BoxScope.() -> Unit)
+    id: String,
+    containerWidthPx: Float,
+    containerHeightPx: Float,
+    modifier: Modifier = Modifier,
+    content: @Composable (BoxScope.() -> Unit)
 ) {
     val savedCard = remember { CardManager.cards.find { it.id == id } }
     var offsetX by remember { mutableStateOf(savedCard?.x ?: 0f) }
     var offsetY by remember { mutableStateOf(savedCard?.y ?: 0f) }
-    val width by remember { mutableStateOf(savedCard?.width ?: 200) }
-    val height by remember { mutableStateOf(savedCard?.height ?: 200) }
+
+    val width by remember { mutableStateOf(savedCard?.width?.toFloat() ?: 200f) }
+    val height by remember { mutableStateOf(savedCard?.height?.toFloat() ?: 200f) }
 
     fun updatePositions(x: Float, y: Float) {
-        offsetX = x
-        offsetY = y.coerceAtLeast(0f)
-        CardManager.update(Card(id, offsetX, offsetY, width, height))
+        offsetX = x.coerceIn(0f, containerWidthPx - width)
+        offsetY = y.coerceIn(0f, containerHeightPx - height)
+        CardManager.update(Card(id, offsetX, offsetY, width.toInt(), height.toInt()))
     }
 
-    Column(modifier = modifier.offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
-        .background(animatedAppColors().hovered).border(1.dp, animatedAppColors().red)) {
+    Column(modifier = modifier.offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }.width(width.dp)
+        .height(height.dp).background(animatedAppColors().hovered).border(1.dp, animatedAppColors().red)) {
         Box(
             modifier = Modifier.fillMaxWidth().height(32.dp).background(animatedAppColors().pressed)
                 .pointerInput(Unit) {
@@ -43,9 +48,9 @@ fun DraggableCard(
                         updatePositions(offsetX + dragAmount.x, offsetY + dragAmount.y)
                     }, onDragEnd = {
                         val snapStep = 10f
-                        offsetX = (offsetX / snapStep).roundToInt() * snapStep
-                        offsetY = ((offsetY / snapStep).roundToInt() * snapStep).coerceAtLeast(0f)
-                        CardManager.update(Card(id, offsetX, offsetY, width, height))
+                        val snappedX = (offsetX / snapStep).roundToInt() * snapStep
+                        val snappedY = (offsetY / snapStep).roundToInt() * snapStep
+                        updatePositions(snappedX, snappedY)
                     })
                 }, contentAlignment = Alignment.Center
         ) {
@@ -53,7 +58,7 @@ fun DraggableCard(
         }
 
         Box(
-            modifier = Modifier.padding(16.dp), content = content
+            modifier = Modifier.padding(16.dp).fillMaxSize(), content = content
         )
     }
 }

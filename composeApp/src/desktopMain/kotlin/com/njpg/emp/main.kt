@@ -4,16 +4,23 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import com.njpg.emp.data.*
+import com.njpg.emp.data.CardManager
+import com.njpg.emp.data.ConfigStorage
+import com.njpg.emp.data.Localization
+import com.njpg.emp.data.ThemeManager
 import emp.composeapp.generated.resources.Res
 import emp.composeapp.generated.resources.icon_svg
 import org.jetbrains.compose.resources.painterResource
 
 fun main() = application {
-    val windowState = rememberWindowState()
+    val windowState = rememberWindowState(
+        size = DpSize(1280.dp, 720.dp)
+    )
     var isInitialized by mutableStateOf(false)
 
     LaunchedEffect(Unit) {
@@ -29,6 +36,7 @@ fun main() = application {
         title = "Easy Music Player",
         icon = painterResource(Res.drawable.icon_svg),
         undecorated = true,
+        resizable = false,
         transparent = true,
         state = windowState
     ) {

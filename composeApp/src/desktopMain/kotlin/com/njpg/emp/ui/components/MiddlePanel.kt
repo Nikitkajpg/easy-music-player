@@ -16,28 +16,6 @@ fun MiddlePanel() {
     Box(
         modifier = Modifier.fillMaxSize().background(animatedAppColors().background)
     ) {
-        DraggableCard(
-            "Card 1", modifier = Modifier.size(CardManager.cards[0].width.dp, CardManager.cards[0].height.dp)
-        ) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Button(onClick = { println("Кнопка 1 была нажата") }) {
-                    Text("Кнопка 1")
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                Button(onClick = { println("Кнопка 2 была нажата") }) {
-                    Text("Кнопка 2")
-                }
-            }
-        }
-
-        DraggableCard(
-            "Card 2", modifier = Modifier.size(CardManager.cards[1].width.dp, CardManager.cards[1].height.dp)
-        ) {
-            Text("Это просто текст в другой карточке!", modifier = Modifier.align(Alignment.Center))
-        }
+        CardContainer()
     }
 }

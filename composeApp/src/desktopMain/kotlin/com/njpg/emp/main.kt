@@ -12,7 +12,7 @@ import androidx.compose.ui.window.rememberWindowState
 import com.njpg.emp.data.CardManager
 import com.njpg.emp.data.ConfigStorage
 import com.njpg.emp.data.Localization
-import com.njpg.emp.data.ThemeManager
+import com.njpg.emp.ui.theme.ThemeManager
 import emp.composeapp.generated.resources.Res
 import emp.composeapp.generated.resources.icon_svg
 import org.jetbrains.compose.resources.painterResource

@@ -1,7 +1,8 @@
 package com.njpg.emp.ui.components
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,34 +18,17 @@ fun CardContainer() {
         val containerWidthPx = with(density) { maxWidth.toPx() }
         val containerHeightPx = with(density) { maxHeight.toPx() }
 
-        DraggableCard(
-            "Card 1",
-            containerWidthPx = containerWidthPx,
-            containerHeightPx = containerHeightPx,
-            modifier = Modifier.size(CardManager.cards[0].width.dp, CardManager.cards[0].height.dp)
-        ) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+        CardManager.cards.forEach { card ->
+            DraggableCard(
+                id = card.id,
+                containerWidthPx = containerWidthPx,
+                containerHeightPx = containerHeightPx,
+                modifier = Modifier.size(card.width.dp, card.height.dp)
             ) {
-                Button(onClick = { println("Кнопка 1 была нажата") }) {
-                    Text("Кнопка 1")
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                Button(onClick = { println("Кнопка 2 была нажата") }) {
-                    Text("Кнопка 2")
-                }
+                Text(
+                    text = "Content for\n${card.id}", modifier = Modifier.align(Alignment.Center)
+                )
             }
-        }
-
-        DraggableCard(
-            "Card 2",
-            containerWidthPx = containerWidthPx,
-            containerHeightPx = containerHeightPx,
-            modifier = Modifier.size(CardManager.cards[1].width.dp, CardManager.cards[1].height.dp)
-        ) {
-            Text("Это просто текст в другой карточке!", modifier = Modifier.align(Alignment.Center))
         }
     }
 }

@@ -15,26 +15,28 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowScope
 import androidx.compose.ui.window.WindowState
-import com.njpg.emp.core.Config
-import com.njpg.emp.data.*
+import com.njpg.emp.data.Localization
 import com.njpg.emp.ui.components.buttons.DefaultButton
-import com.njpg.emp.ui.util.icons.*
+import com.njpg.emp.ui.icons.*
+import com.njpg.emp.ui.theme.AppTheme
+import com.njpg.emp.ui.theme.ThemeManager
 import emp.composeapp.generated.resources.Res
 import emp.composeapp.generated.resources.icon_svg
 import org.jetbrains.compose.resources.painterResource
-import kotlin.system.exitProcess
 
 @Composable
-fun WindowScope.TopPanel(windowState: WindowState) {
+fun WindowScope.TopPanel(
+    windowState: WindowState, onExitRequest: () -> Unit
+) {
+    val colors = AppTheme.colors
+
     WindowDraggableArea(modifier = Modifier.fillMaxWidth()) {
         Row(
-            modifier = Modifier.fillMaxWidth().background(animatedAppColors().background),
+            modifier = Modifier.fillMaxWidth().background(colors.background),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Image(
                     painter = painterResource(Res.drawable.icon_svg),
                     contentDescription = "Icon",
@@ -42,13 +44,11 @@ fun WindowScope.TopPanel(windowState: WindowState) {
                 )
                 Spacer(Modifier.width(20.dp))
                 Text(
-                    text = "Easy Music Player", color = animatedAppColors().yellow, fontSize = 16.sp
+                    text = "Easy Music Player", color = colors.yellow, fontSize = 16.sp
                 )
             }
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(end = 10.dp)
-            ) {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(end = 10.dp)) {
                 DefaultButton(
                     tooltipText = Localization.tr("change_language"), onClick = {
                         Localization.toggleLanguage()
@@ -96,17 +96,10 @@ fun WindowScope.TopPanel(windowState: WindowState) {
 
                 DefaultButton(
                     tooltipText = Localization.tr("exit"),
-                    pressedColor = animatedAppColors().redPressed,
-                    hoveredColor = animatedAppColors().red,
-                    onClick = {
-                        CardManager.save()
-                        ConfigStorage.save(
-                            config = Config(
-                                lang = Localization.getCurrentLang(), theme = ThemeManager.getThemeAsString()
-                            )
-                        )
-                        exitProcess(0)
-                    }) {
+                    pressedColor = colors.redPressed,
+                    hoveredColor = colors.red,
+                    onClick = onExitRequest
+                ) {
                     Icon(
                         imageVector = exitIcon(),
                         contentDescription = "Exit",

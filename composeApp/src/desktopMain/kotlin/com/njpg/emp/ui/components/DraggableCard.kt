@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.njpg.emp.core.Card
 import com.njpg.emp.data.CardManager
 import com.njpg.emp.data.Localization
-import com.njpg.emp.data.animatedAppColors
+import com.njpg.emp.ui.theme.AppTheme
 import kotlin.math.roundToInt
 
 @Composable
@@ -25,6 +25,7 @@ fun DraggableCard(
     modifier: Modifier = Modifier,
     content: @Composable (BoxScope.() -> Unit)
 ) {
+    val colors = AppTheme.colors
     val savedCard = remember { CardManager.cards.find { it.id == id } }
     var offsetX by remember { mutableStateOf(savedCard?.x ?: 0f) }
     var offsetY by remember { mutableStateOf(savedCard?.y ?: 0f) }
@@ -38,11 +39,12 @@ fun DraggableCard(
         CardManager.update(Card(id, offsetX, offsetY, width.toInt(), height.toInt()))
     }
 
-    Column(modifier = modifier.offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }.width(width.dp)
-        .height(height.dp).background(animatedAppColors().hovered).border(1.dp, animatedAppColors().red)) {
+    Column(
+        modifier = modifier.offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }.width(width.dp)
+            .height(height.dp).background(colors.hovered).border(1.dp, colors.red)
+    ) {
         Box(
-            modifier = Modifier.fillMaxWidth().height(32.dp).background(animatedAppColors().pressed)
-                .pointerInput(Unit) {
+            modifier = Modifier.fillMaxWidth().height(32.dp).background(colors.pressed).pointerInput(Unit) {
                     detectDragGestures(onDrag = { change, dragAmount ->
                         change.consume()
                         updatePositions(offsetX + dragAmount.x, offsetY + dragAmount.y)
@@ -54,7 +56,7 @@ fun DraggableCard(
                     })
                 }, contentAlignment = Alignment.Center
         ) {
-            Text(text = Localization.tr("drag"), color = animatedAppColors().white)
+            Text(text = Localization.tr("drag"), color = colors.white)
         }
 
         Box(

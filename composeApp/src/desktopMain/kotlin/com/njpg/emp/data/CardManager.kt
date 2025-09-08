@@ -1,29 +1,22 @@
 package com.njpg.emp.data
 
 import com.njpg.emp.core.Card
-import com.njpg.emp.data.CardPositionStorage.loadAll
-import com.njpg.emp.data.CardPositionStorage.saveAll
 
 object CardManager {
-    private var _cards: MutableList<Card> = mutableListOf()
+    private var _cards: MutableMap<String, Card> = mutableMapOf()
 
     val cards: List<Card>
-        get() = _cards
+        get() = _cards.values.toList()
 
-    fun init() {
-        _cards = loadAll().toMutableList()
+    suspend fun init() {
+        _cards = CardPositionStorage.loadAll().associateBy { it.id }.toMutableMap()
     }
 
     fun update(card: Card) {
-        val index = _cards.indexOfFirst { it.id == card.id }
-        if (index >= 0) {
-            _cards[index] = card
-        } else {
-            _cards.add(card)
-        }
+        _cards[card.id] = card
     }
 
-    fun save() {
-        saveAll(_cards)
+    suspend fun save() {
+        CardPositionStorage.saveAll(cards)
     }
 }

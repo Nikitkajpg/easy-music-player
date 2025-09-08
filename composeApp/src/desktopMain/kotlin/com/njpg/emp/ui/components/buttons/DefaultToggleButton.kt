@@ -17,19 +17,19 @@ import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.njpg.emp.data.animatedAppColors
 import com.njpg.emp.ui.components.TooltipWrapper
+import com.njpg.emp.ui.theme.AppTheme
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DefaultToggleButton(
     isToggled: Boolean,
     onToggle: (Boolean) -> Unit,
-    backgroundColor: Color = animatedAppColors().transparent,
-    pressedColor: Color = animatedAppColors().pressed,
-    hoveredColor: Color = animatedAppColors().hovered,
-    toggledColor: Color = animatedAppColors().yellow,
-    toggledHoveredColor: Color = animatedAppColors().yellowToggled,
+    backgroundColor: Color = AppTheme.colors.transparent,
+    pressedColor: Color = AppTheme.colors.pressed,
+    hoveredColor: Color = AppTheme.colors.hovered,
+    toggledColor: Color = AppTheme.colors.yellow,
+    toggledHoveredColor: Color = AppTheme.colors.yellowToggled,
     tooltipText: String,
     cornerRadius: Dp = 8.dp,
     onClick: () -> Unit,

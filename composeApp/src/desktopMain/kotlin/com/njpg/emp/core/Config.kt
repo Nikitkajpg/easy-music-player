@@ -1,6 +1,6 @@
 package com.njpg.emp.core
 
-import com.njpg.emp.data.DarkTheme
+import com.njpg.emp.ui.theme.DarkTheme
 import kotlinx.serialization.Serializable
 
 @Serializable

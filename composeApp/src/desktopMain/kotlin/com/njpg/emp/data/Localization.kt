@@ -6,29 +6,29 @@ import androidx.compose.runtime.setValue
 import com.njpg.emp.core.Config
 import com.njpg.emp.core.Translations
 import emp.composeapp.generated.resources.Res
-import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import java.io.File
 
 object Localization {
-    private val json = Json { ignoreUnknownKeys = true }
     private var translations: Translations = Translations()
     private var currentLanguage by mutableStateOf("en")
-    private val externalFile = File("strings.json") // внешний файл рядом с приложением
+    private val externalFile = File("strings.json")
 
     @OptIn(ExperimentalResourceApi::class)
     suspend fun init(config: Config) {
         val defaultJson = Res.readBytes("files/strings.json").decodeToString()
-        translations = json.decodeFromString(Translations.serializer(), defaultJson)
+        translations = AppJson.decodeFromString(Translations.serializer(), defaultJson)
 
         if (externalFile.exists()) {
             runCatching {
                 val overrideJson = externalFile.readText()
-                val override = json.decodeFromString(Translations.serializer(), overrideJson)
+                val override = AppJson.decodeFromString(Translations.serializer(), overrideJson)
 
                 translations = translations.copy(
                     en = translations.en + override.en, ru = translations.ru + override.ru
                 )
+            }.onFailure {
+                println("Error while reading external localization file: ${it.message}")
             }
         }
 

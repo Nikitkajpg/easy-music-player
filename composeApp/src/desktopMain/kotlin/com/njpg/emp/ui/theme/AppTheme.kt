@@ -3,7 +3,6 @@ package com.njpg.emp.ui.theme
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
-import com.njpg.emp.core.Theme
 import com.njpg.emp.ui.util.toColor
 
 object ThemeManager {
@@ -24,11 +23,11 @@ data class ThemeColors(
     val background: Color,
     val hovered: Color,
     val pressed: Color,
-    val yellow: Color,
-    val yellowToggled: Color,
+    val text: Color,
+    val toggled: Color,
     val red: Color,
     val redPressed: Color,
-    val white: Color,
+    val icon: Color,
     val transparent: Color
 )
 
@@ -41,11 +40,11 @@ object AppTheme {
                 background = animateColorAsState(current.background.toColor()).value,
                 hovered = animateColorAsState(current.hovered.toColor()).value,
                 pressed = animateColorAsState(current.pressed.toColor()).value,
-                yellow = animateColorAsState(current.yellow.toColor()).value,
-                yellowToggled = animateColorAsState(current.yellowToggled.toColor()).value,
+                text = animateColorAsState(current.text.toColor()).value,
+                toggled = animateColorAsState(current.toggled.toColor()).value,
                 red = animateColorAsState(current.red.toColor()).value,
                 redPressed = animateColorAsState(current.redPressed.toColor()).value,
-                white = animateColorAsState(current.white.toColor()).value,
+                icon = animateColorAsState(current.icon.toColor()).value,
                 transparent = Color.Transparent
             )
         }

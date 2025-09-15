@@ -1,9 +1,6 @@
 package com.njpg.emp
 
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
@@ -21,7 +18,7 @@ fun main() = application {
     val windowState = rememberWindowState(
         size = DpSize(1280.dp, 720.dp)
     )
-    var isInitialized by mutableStateOf(false)
+    var isInitialized by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         val config = ConfigStorage.load()

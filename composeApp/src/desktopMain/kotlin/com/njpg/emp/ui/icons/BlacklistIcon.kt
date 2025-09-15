@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.njpg.emp.ui.theme.AppTheme
 
 @Composable
-fun blacklistIcon(strokeColor: Color = AppTheme.colors.white): ImageVector = Builder(
+fun blacklistIcon(strokeColor: Color = AppTheme.colors.icon): ImageVector = Builder(
     name = "ShuffleIcon", defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f
 ).apply {
     path(

@@ -44,7 +44,7 @@ fun WindowScope.TopPanel(
                 )
                 Spacer(Modifier.width(20.dp))
                 Text(
-                    text = "Easy Music Player", color = colors.yellow, fontSize = 16.sp
+                    text = "Easy Music Player", color = colors.text, fontSize = 16.sp
                 )
             }
 
@@ -53,12 +53,14 @@ fun WindowScope.TopPanel(
                     tooltipText = Localization.tr("change_language"), onClick = {
                         Localization.toggleLanguage()
                     }) {
-                    Text(text = Localization.getCurrentLang())
+                    Text(
+                        text = Localization.getCurrentLang(), color = colors.text, fontSize = 16.sp
+                    )
                 }
                 DefaultButton(
                     tooltipText = Localization.tr("change_theme"), onClick = { ThemeManager.toggleTheme() }) {
                     Icon(
-                        imageVector = blacklistIcon(),
+                        imageVector = themeIcon(),
                         contentDescription = "Change theme",
                         tint = Color.Unspecified,
                         modifier = Modifier.size(24.dp)

@@ -63,7 +63,7 @@ fun DraggableCard(
                     })
                 }, contentAlignment = Alignment.Center
         ) {
-            Text(text = Localization.tr("drag"), color = colors.white)
+            Text(text = Localization.tr("drag"), color = colors.icon)
         }
 
         Box(

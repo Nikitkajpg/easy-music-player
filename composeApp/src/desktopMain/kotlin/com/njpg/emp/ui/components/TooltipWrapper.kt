@@ -23,7 +23,7 @@ fun TooltipWrapper(tooltipText: String, content: @Composable BoxScope.() -> Unit
                 modifier = Modifier.clip(RoundedCornerShape(8.dp)).background(colors.hovered)
                     .border(width = 1.dp, color = colors.redPressed, RoundedCornerShape(8.dp)).padding(6.dp)
             ) {
-                Text(tooltipText, color = colors.white)
+                Text(tooltipText, color = colors.icon)
             }
         }, tooltipPlacement = TooltipPlacement.CursorPoint(offset = DpOffset(0.dp, 16.dp))
     ) {

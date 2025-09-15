@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.njpg.emp.ui.theme.AppTheme
 
 @Composable
-fun previousIcon(strokeColor: Color = AppTheme.colors.white): ImageVector = Builder(
+fun previousIcon(strokeColor: Color = AppTheme.colors.icon): ImageVector = Builder(
     name = "PreviousIcon", defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f
 ).apply {
     val cornerRadius = 2f

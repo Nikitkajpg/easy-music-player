@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.njpg.emp.ui.theme.AppTheme
 
 @Composable
-fun minimizeIcon(strokeColor: Color = AppTheme.colors.white): ImageVector = Builder(
+fun minimizeIcon(strokeColor: Color = AppTheme.colors.icon): ImageVector = Builder(
     name = "MinimizeIcon", defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f
 ).apply {
     path(

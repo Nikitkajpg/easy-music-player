@@ -6,7 +6,11 @@
     "maximize" : "Maximize",
     "restore" : "Restore",
     "exit" : "Exit",
-    "drag" : "Drag"
+    "drag" : "Drag",
+    "pause": "Pause",
+    "play": "Play",
+    "previous_track": "Previous track",
+    "next_track": "Next track"
   },
   "ru" : {
     "change_language" : "Изменить язык",
@@ -15,6 +19,10 @@
     "maximize" : "Развернуть",
     "restore" : "Восстановить",
     "exit" : "Выход",
-    "drag" : "Переместить"
+    "drag" : "Переместить",
+    "pause": "Пауза",
+    "play": "Играть",
+    "previous_track": "Предыдущий трек",
+    "next_track": "Следующий трек"
   }
 }

@@ -7,7 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
+import com.njpg.emp.core.CardId
 import com.njpg.emp.data.CardManager
+import com.njpg.emp.ui.components.cards.MainCard
 
 @Composable
 fun CardContainer() {
@@ -23,11 +25,22 @@ fun CardContainer() {
                 containerHeightPx = containerHeightPx,
                 onDragEnd = { updatedCard ->
                     CardManager.update(updatedCard)
+                },
+                onResizeEnd = { updatedCard ->
+                    CardManager.update(updatedCard)
+                }) {
+                when (card.id) {
+                    CardId.MAIN -> {
+                        MainCard()
+                    }
+
+                    CardId.INFO -> {
+                        Text(
+                            text = "Content for\n${card.id}", modifier = Modifier.align(Alignment.Center)
+                        )
+                    }
                 }
-            ) {
-                Text(
-                    text = "Content for\n${card.id}", modifier = Modifier.align(Alignment.Center)
-                )
+
             }
         }
     }

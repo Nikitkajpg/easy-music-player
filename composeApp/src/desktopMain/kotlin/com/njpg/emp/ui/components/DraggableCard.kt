@@ -24,50 +24,81 @@ fun DraggableCard(
     containerHeightPx: Float,
     modifier: Modifier = Modifier,
     onDragEnd: (updatedCard: Card) -> Unit,
+    onResizeEnd: (updatedCard: Card) -> Unit,
     content: @Composable (BoxScope.() -> Unit)
 ) {
     val colors = AppTheme.colors
 
     var offsetX by remember { mutableStateOf(card.x) }
     var offsetY by remember { mutableStateOf(card.y) }
+    var width by remember { mutableStateOf(card.width) }
+    var height by remember { mutableStateOf(card.height) }
 
     val density = LocalDensity.current
 
-    val cardWidthPx = with(density) { card.width.dp.toPx() }
-    val cardHeightPx = with(density) { card.height.dp.toPx() }
+    val minWidth = 100.dp
+    val minHeight = 100.dp
 
-    LaunchedEffect(card.x, card.y) {
+    LaunchedEffect(card.x, card.y, card.width, card.height) {
         offsetX = card.x
         offsetY = card.y
+        width = card.width
+        height = card.height
     }
 
-    Column(modifier = modifier.offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
-        .size(card.width.dp, card.height.dp).background(colors.hovered).border(1.dp, colors.red)) {
+    Box(
+        modifier = modifier.offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }.size(width.dp, height.dp)
+            .background(colors.background).border(1.dp, colors.text)
+    ) {
         Box(
-            modifier = Modifier.fillMaxWidth().height(32.dp).background(colors.pressed).pointerInput(Unit) {
-                    detectDragGestures(onDrag = { change, dragAmount ->
-                        change.consume()
-                        val newX = (offsetX + dragAmount.x).coerceIn(0f, containerWidthPx - cardWidthPx)
-                        val newY = (offsetY + dragAmount.y).coerceIn(0f, containerHeightPx - cardHeightPx)
-                        offsetX = newX
-                        offsetY = newY
-                    }, onDragEnd = {
-                        val snapStep = 10f
-                        val snappedX = (offsetX / snapStep).roundToInt() * snapStep
-                        val snappedY = (offsetY / snapStep).roundToInt() * snapStep
+            modifier = Modifier.fillMaxWidth().height(32.dp).background(colors.hovered).pointerInput(Unit) {
+                detectDragGestures(onDrag = { change, dragAmount ->
+                    change.consume()
+                    val newX =
+                        (offsetX + dragAmount.x).coerceIn(0f, containerWidthPx - with(density) { width.dp.toPx() })
+                    val newY = (offsetY + dragAmount.y).coerceIn(
+                        0f, containerHeightPx - with(density) { height.dp.toPx() })
+                    offsetX = newX
+                    offsetY = newY
+                }, onDragEnd = {
+                    val snapStep = 10f
+                    val snappedX = (offsetX / snapStep).roundToInt() * snapStep
+                    val snappedY = (offsetY / snapStep).roundToInt() * snapStep
 
-                        offsetX = snappedX
-                        offsetY = snappedY
+                    offsetX = snappedX
+                    offsetY = snappedY
 
-                        onDragEnd(card.copy(x = snappedX, y = snappedY))
-                    })
-                }, contentAlignment = Alignment.Center
+                    onDragEnd(card.copy(x = snappedX, y = snappedY))
+                })
+            }.align(Alignment.TopCenter), contentAlignment = Alignment.Center
         ) {
             Text(text = Localization.tr("drag"), color = colors.icon)
         }
 
         Box(
-            modifier = Modifier.padding(16.dp).fillMaxSize(), content = content
-        )
+            modifier = Modifier.padding(16.dp).fillMaxSize()
+        ) {
+            content()
+        }
+
+        Box(
+            modifier = Modifier.size(24.dp).align(Alignment.BottomEnd).background(colors.hovered).pointerInput(Unit) {
+                detectDragGestures(onDrag = { change, dragAmount ->
+                    change.consume()
+                    val newWidth = width.dp + dragAmount.x.toDp()
+                    val newHeight = height.dp + dragAmount.y.toDp()
+                    width = newWidth.value.toInt()
+                    height = newHeight.value.toInt()
+                }, onDragEnd = {
+                    val snapStep = 10f
+                    val snappedWidth = ((width / snapStep).roundToInt() * snapStep).coerceAtLeast(minWidth.toPx())
+                    val snappedHeight = ((height / snapStep).roundToInt() * snapStep).coerceAtLeast(minHeight.toPx())
+
+                    width = snappedWidth.toInt()
+                    height = snappedHeight.toInt()
+
+                    onResizeEnd(card.copy(width = width, height = height))
+                })
+            })
     }
 }

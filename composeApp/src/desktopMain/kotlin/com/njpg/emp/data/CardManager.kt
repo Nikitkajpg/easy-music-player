@@ -1,9 +1,10 @@
 package com.njpg.emp.data
 
 import com.njpg.emp.core.Card
+import com.njpg.emp.core.CardId
 
 object CardManager {
-    private var _cards: MutableMap<String, Card> = mutableMapOf()
+    private var _cards: MutableMap<CardId, Card> = mutableMapOf()
 
     val cards: List<Card>
         get() = _cards.values.toList()

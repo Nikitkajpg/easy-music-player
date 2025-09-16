@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Card(
-    val id: String,
+    val id: CardId,
     val x: Float,
     val y: Float,
     val width: Int,

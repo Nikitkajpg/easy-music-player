@@ -8,6 +8,7 @@ import androidx.compose.ui.window.WindowState
 import com.njpg.emp.core.Config
 import com.njpg.emp.data.CardManager
 import com.njpg.emp.data.ConfigStorage
+import com.njpg.emp.data.DirectoryManager
 import com.njpg.emp.data.Localization
 import com.njpg.emp.ui.components.MiddlePanel
 import com.njpg.emp.ui.components.TopPanel
@@ -21,19 +22,18 @@ fun WindowScope.App(windowState: WindowState) {
 
     Column {
         TopPanel(
-            windowState = windowState,
-            onExitRequest = {
+            windowState = windowState, onExitRequest = {
                 scope.launch {
                     CardManager.save()
                     val config = Config(
                         lang = Localization.getCurrentLang(),
-                        theme = ThemeManager.currentTheme
+                        theme = ThemeManager.currentTheme,
+                        defaultFolderPath = DirectoryManager.defaultFolderPath
                     )
                     ConfigStorage.save(config)
                     exitProcess(0)
                 }
-            }
-        )
+            })
         MiddlePanel()
     }
 }

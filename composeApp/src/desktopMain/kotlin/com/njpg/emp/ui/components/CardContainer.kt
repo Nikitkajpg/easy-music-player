@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import com.njpg.emp.core.CardId
 import com.njpg.emp.data.CardManager
+import com.njpg.emp.ui.components.cards.DefaultPlaylistCard
 import com.njpg.emp.ui.components.cards.MainCard
 
 @Composable
@@ -38,6 +39,10 @@ fun CardContainer() {
                         Text(
                             text = "Content for\n${card.id}", modifier = Modifier.align(Alignment.Center)
                         )
+                    }
+
+                    CardId.DEFAULT_PLAYLIST -> {
+                        DefaultPlaylistCard()
                     }
                 }
 

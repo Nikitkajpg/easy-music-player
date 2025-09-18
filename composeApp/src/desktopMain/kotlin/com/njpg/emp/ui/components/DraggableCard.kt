@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
 import com.njpg.emp.core.Card
 import com.njpg.emp.data.Localization
@@ -36,8 +37,9 @@ fun DraggableCard(
 
     val density = LocalDensity.current
 
-    val minWidth = 100.dp
+    val minWidth = 150.dp
     val minHeight = 100.dp
+    val snapStep = 10f
 
     LaunchedEffect(card.x, card.y, card.width, card.height) {
         offsetX = card.x
@@ -61,7 +63,6 @@ fun DraggableCard(
                     offsetX = newX
                     offsetY = newY
                 }, onDragEnd = {
-                    val snapStep = 10f
                     val snappedX = (offsetX / snapStep).roundToInt() * snapStep
                     val snappedY = (offsetY / snapStep).roundToInt() * snapStep
 
@@ -85,12 +86,11 @@ fun DraggableCard(
             modifier = Modifier.size(24.dp).align(Alignment.BottomEnd).background(colors.hovered).pointerInput(Unit) {
                 detectDragGestures(onDrag = { change, dragAmount ->
                     change.consume()
-                    val newWidth = width.dp + dragAmount.x.toDp()
-                    val newHeight = height.dp + dragAmount.y.toDp()
+                    val newWidth = (width.dp + dragAmount.x.toDp()).coerceAtLeast(minWidth.toPx().dp)
+                    val newHeight = (height.dp + dragAmount.y.toDp()).coerceAtLeast(minHeight.toPx().dp)
                     width = newWidth.value.toInt()
                     height = newHeight.value.toInt()
                 }, onDragEnd = {
-                    val snapStep = 10f
                     val snappedWidth = ((width / snapStep).roundToInt() * snapStep).coerceAtLeast(minWidth.toPx())
                     val snappedHeight = ((height / snapStep).roundToInt() * snapStep).coerceAtLeast(minHeight.toPx())
 

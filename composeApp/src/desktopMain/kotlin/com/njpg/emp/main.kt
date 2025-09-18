@@ -6,9 +6,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import com.njpg.emp.data.CardManager
-import com.njpg.emp.data.ConfigStorage
-import com.njpg.emp.data.Localization
+import com.njpg.emp.data.*
 import com.njpg.emp.ui.theme.ThemeManager
 import emp.composeapp.generated.resources.Res
 import emp.composeapp.generated.resources.icon_svg
@@ -25,6 +23,8 @@ fun main() = application {
         CardManager.init()
         Localization.init(config)
         ThemeManager.setTheme(config.theme)
+        DirectoryManager.init(config.defaultFolderPath)
+        PlaylistManager.init()
         isInitialized = true
     }
 

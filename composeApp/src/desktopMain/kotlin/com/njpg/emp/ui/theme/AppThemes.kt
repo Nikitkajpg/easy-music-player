@@ -3,25 +3,25 @@ package com.njpg.emp.ui.theme
 import kotlinx.serialization.Serializable
 
 val DarkTheme = Theme(
-    background = "#222222",
-    hovered = "#444444",
-    pressed = "#555555",
-    text = "#f4fff8",
-    toggled = "#cca000", //todo поменять потом (или нет)
-    red = "#FB5012",
-    redPressed = "#FC7A4A",
-    icon = "#f4fff8"
+    background = "#222222",     // dark
+    hovered = "#444444",        // not so dark
+    pressed = "#555555",        // not so dark 2x
+    text = "#f4fff8",           // white
+    toggled = "#cca000",        // dark yellow todo поменять потом (или нет)
+    red = "#fb5012",            // red
+    redPressed = "#fc7a4a",     // light red
+    icon = "#f4fff8"            // white
 )
 
 val LightTheme = Theme(
-    background = "#f4fff8",
-    hovered = "#dddddd",
-    pressed = "#cccccc",
-    text = "#222222",
-    toggled = "#cca000", //todo поменять потом (или нет)
-    red = "#FB5012",
-    redPressed = "#FC7A4A",
-    icon = "#222222"
+    background = "#f4fff8",     // white
+    hovered = "#dddddd",        // light 2x
+    pressed = "#cccccc",        // light
+    text = "#222222",           // dark
+    toggled = "#cca000",        // dark yellow todo поменять потом (или нет)
+    red = "#fb5012",            // red
+    redPressed = "#fc7a4a",     // light red
+    icon = "#222222"            // dark
 )
 
 @Serializable

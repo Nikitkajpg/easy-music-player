@@ -13,7 +13,8 @@ object CardPositionStorage {
     private val defaultCardsJson = """
         [
             { "id": "MAIN", "x": 0.0, "y": 0.0, "width": 200, "height": 200 },
-            { "id": "INFO", "x": 100.0, "y": 100.0, "width": 200, "height": 200 }
+            { "id": "INFO", "x": 100.0, "y": 100.0, "width": 200, "height": 200 },
+            { "id": "DEFAULT_PLAYLIST", "x": 300.0, "y": 300.0, "width": 200, "height": 200 }
         ]
     """.trimIndent()
 

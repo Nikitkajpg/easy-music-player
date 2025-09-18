@@ -7,5 +7,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Config(
     val lang: String = "en",
-    val theme: Theme = DarkTheme
+    val theme: Theme = DarkTheme,
+    val defaultFolderPath: String = "home"
 )

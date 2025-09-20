@@ -9,10 +9,18 @@ object PlaylistManager {
         get() = _playlists
 
     fun init() {
-        _playlists.add(Playlist(Localization.tr("all_tracks"), TrackManager.getTracksForDefaultPlaylist()))
+        val tracks = TrackManager.loadTracksForDefaultPlaylist()
+        _playlists.add(Playlist(Localization.tr("all_tracks"), tracks))
     }
 
-    fun getDefaultPlaylist(): Playlist {
-        return _playlists[0]
+    fun reloadFromDefaultPlaylist() {
+        val tracks = TrackManager.loadTracksForDefaultPlaylist()
+        if (_playlists.isNotEmpty()) {
+            _playlists[0] = Playlist(Localization.tr("all_tracks"), tracks)
+        }
+    }
+
+    fun getDefaultPlaylist(): Playlist? {
+        return _playlists.getOrNull(0)
     }
 }

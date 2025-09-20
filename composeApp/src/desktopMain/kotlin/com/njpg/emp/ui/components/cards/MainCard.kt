@@ -5,13 +5,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.njpg.emp.data.DirectoryManager
-import com.njpg.emp.data.Localization
+import com.njpg.emp.data.*
 import com.njpg.emp.ui.components.buttons.DefaultButton
 import com.njpg.emp.ui.icons.*
 import com.njpg.emp.ui.theme.AppTheme
@@ -21,15 +22,17 @@ import javax.swing.filechooser.FileSystemView
 
 @Composable
 fun MainCard() {
-    var isPlaying by remember { mutableStateOf(false) }
-    val selectedFolderPath = remember { mutableStateOf<String?>(null) }
+    val playerState by PlayerController.playerState.collectAsState()
+    val isPlaying = playerState == PlayerState.PLAYING
 
     Box(
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
     ) {
         Row {
             DefaultButton(
-                tooltipText = Localization.tr("previous_track"), onClick = {}) {
+                tooltipText = Localization.tr("previous_track"), onClick = {
+                    //todo previous track logic
+                }) {
                 Icon(
                     imageVector = previousIcon(),
                     contentDescription = "Previous track",
@@ -39,7 +42,10 @@ fun MainCard() {
             }
             DefaultButton(
                 tooltipText = if (isPlaying) Localization.tr("pause") else Localization.tr("play"), onClick = {
-                    isPlaying = !isPlaying
+                    val trackToPlay = PlaylistManager.getDefaultPlaylist()?.tracks?.firstOrNull()
+                    trackToPlay?.let {
+                        PlayerController.togglePlayPause(it)
+                    }
                 }) {
                 Icon(
                     imageVector = if (isPlaying) pauseIcon() else playIcon(),
@@ -49,7 +55,9 @@ fun MainCard() {
                 )
             }
             DefaultButton(
-                tooltipText = Localization.tr("next_track"), onClick = {}) {
+                tooltipText = Localization.tr("next_track"), onClick = {
+                    //todo next track logic
+                }) {
                 Icon(
                     imageVector = nextIcon(),
                     contentDescription = "Next track",
@@ -71,8 +79,8 @@ fun MainCard() {
 
                     if (result == JFileChooser.APPROVE_OPTION) {
                         val selectedFile: File = fileChooser.selectedFile
-                        selectedFolderPath.value = selectedFile.absolutePath
                         DirectoryManager.updateDefaultFolderPath(selectedFile.absolutePath)
+                        PlaylistManager.reloadFromDefaultPlaylist()
                     }
                 }) {
                 Icon(

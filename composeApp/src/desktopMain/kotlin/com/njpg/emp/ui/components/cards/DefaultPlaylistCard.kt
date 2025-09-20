@@ -17,8 +17,10 @@ fun DefaultPlaylistCard() {
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
     ) {
         Column {
-            Text(text = playlist.name, color = AppTheme.colors.text)
-            playlist.tracks.forEach { track ->
+            if (playlist != null) {
+                Text(text = playlist.name, color = AppTheme.colors.text)
+            }
+            playlist?.tracks?.forEach { track ->
                 Text(text = track.title, color = AppTheme.colors.text)
             }
         }

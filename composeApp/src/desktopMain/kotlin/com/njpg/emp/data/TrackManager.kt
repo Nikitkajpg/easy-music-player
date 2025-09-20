@@ -10,14 +10,25 @@ object TrackManager {
     val tracks: List<Track>
         get() = _tracks
 
-    fun getTracksForDefaultPlaylist(): List<Track> {
+    fun loadTracksForDefaultPlaylist(): List<Track> {
+        _tracksForDefaultPlaylist.clear()
+
         val dir = File(DirectoryManager.defaultFolderPath)
         if (dir.exists() && dir.isDirectory) {
             dir.listFiles()?.forEach { file ->
-                val track = Track(
-                    id = 0, title = file.nameWithoutExtension, filePath = file.absolutePath, artist = "", duration = 0
-                )
-                _tracksForDefaultPlaylist.add(track)
+                if (file.extension.equals("mp3", ignoreCase = true) || file.extension.equals(
+                        "wav", ignoreCase = true
+                    )
+                ) {
+                    val track = Track(
+                        id = 0, //todo generate unique id
+                        title = file.nameWithoutExtension,
+                        filePath = file.absolutePath,
+                        artist = "Unknown", //todo reading metadata
+                        duration = 0
+                    )
+                    _tracksForDefaultPlaylist.add(track)
+                }
             }
         }
         return _tracksForDefaultPlaylist

@@ -31,7 +31,7 @@ fun MainCard() {
         Row {
             DefaultButton(
                 tooltipText = Localization.tr("previous_track"), onClick = {
-                    //todo previous track logic
+                    PlayerController.playPrevious()
                 }) {
                 Icon(
                     imageVector = previousIcon(),
@@ -42,10 +42,17 @@ fun MainCard() {
             }
             DefaultButton(
                 tooltipText = if (isPlaying) Localization.tr("pause") else Localization.tr("play"), onClick = {
-                    val trackToPlay = PlaylistManager.getDefaultPlaylist()?.tracks?.firstOrNull()
+                    if (playerState == PlayerState.STOPPED) {
+                        val playlist = PlaylistManager.getDefaultPlaylist()?.tracks
+                        if (!playlist.isNullOrEmpty()) {
+                            PlayerController.playTrackFromPlaylist(playlist, 0)
+                        }
+                    } else {
+                        PlayerController.togglePlayPause()
+                    }/*val trackToPlay = PlaylistManager.getDefaultPlaylist()?.tracks?.firstOrNull()
                     trackToPlay?.let {
                         PlayerController.togglePlayPause(it)
-                    }
+                    }*/
                 }) {
                 Icon(
                     imageVector = if (isPlaying) pauseIcon() else playIcon(),
@@ -56,7 +63,7 @@ fun MainCard() {
             }
             DefaultButton(
                 tooltipText = Localization.tr("next_track"), onClick = {
-                    //todo next track logic
+                    PlayerController.playNext()
                 }) {
                 Icon(
                     imageVector = nextIcon(),
@@ -80,6 +87,7 @@ fun MainCard() {
                     if (result == JFileChooser.APPROVE_OPTION) {
                         val selectedFile: File = fileChooser.selectedFile
                         DirectoryManager.updateDefaultFolderPath(selectedFile.absolutePath)
+                        PlayerController.stop()
                         PlaylistManager.reloadFromDefaultPlaylist()
                     }
                 }) {

@@ -13,7 +13,9 @@
     "next_track": "Next track",
     "select_folder": "Select folder",
     "choose_dir": "Choose directory",
-    "all_tracks": "All tracks"
+    "all_tracks": "All tracks",
+    "track_not_selected": "Unknown track",
+    "unknown_artist": "Unknown artist"
   },
   "ru" : {
     "change_language" : "Изменить язык",
@@ -29,6 +31,8 @@
     "next_track": "Следующий трек",
     "select_folder": "Выбрать папку",
     "choose_dir": "Выбрать папку",
-    "all_tracks": "Все треки"
+    "all_tracks": "Все треки",
+    "track_not_selected": "Неизвестный трек",
+    "unknown_artist": "Неизвестный исполнитель"
   }
 }
